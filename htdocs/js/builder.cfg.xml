@@ -63,6 +63,7 @@
                 <file>ngs/loads/admin/AdminMainLoad.class.js</file>
                 <file>ngs/loads/admin/AdminHomeLoad.class.js</file>
                 <file>ngs/loads/admin/AdminCopterLoad.class.js</file>
+                <file>ngs/loads/admin/AdminCoptersLoad.class.js</file>
                 <file>ngs/loads/admin/AdminVlcPlayerLoad.class.js</file>
             </files>
         </input>

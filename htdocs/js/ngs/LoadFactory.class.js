@@ -11,6 +11,7 @@ ngs.LoadFactory.prototype={
         this.loads["admin_main"] = function temp(){return new ngs.AdminMainLoad("admin_main", ajaxLoader);};
 		this.loads["admin_home"] = function temp(){return new ngs.AdminHomeLoad("admin_home", ajaxLoader);};
 		this.loads["admin_copter"] = function temp(){return new ngs.AdminCopterLoad("admin_copter", ajaxLoader);};
+		this.loads["admin_copters"] = function temp(){return new ngs.AdminCoptersLoad("admin_copters", ajaxLoader);};
 		this.loads["admin_vlc_player"] = function temp(){return new ngs.AdminVlcPlayerLoad("admin_vlc_player", ajaxLoader);};
 		this.loads["user_main"] = function temp(){return new ngs.DentistMainLoad("user_main", ajaxLoader);};
 		this.loads["user_home"] = function temp(){return new ngs.DentistHomeLoad("user_home", ajaxLoader);};

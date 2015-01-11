@@ -35,6 +35,7 @@ class ActiveCoptersManager extends AbstractManager {
         return self::$instance;
     }
 
+
     public function addCopter($uniqueId, $name, $ip) {
         $dto = $this->selectByField('unique_id', $uniqueId);
         if (empty($dto)) {
@@ -42,10 +43,12 @@ class ActiveCoptersManager extends AbstractManager {
             $dto->setUniqueId($uniqueId);
             $dto->setName($name);
             $dto->setIp($ip);
+            $dto->setEnable(1);
             return $this->insertDto($dto);
         }
         $dto[0]->setName($name);
         $dto[0]->setIp($ip);
+        $dto[0]->setEnable(1);
         $this->updateByPk($dto[0]);
     }
 

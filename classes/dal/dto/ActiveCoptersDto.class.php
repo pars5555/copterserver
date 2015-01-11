@@ -14,7 +14,8 @@ class ActiveCoptersDto extends AbstractDto {
         "id" => "id",
         "unique_id" => "uniqueId",
         "name" => "name",
-        "ip" => "ip"
+        "ip" => "ip",
+        "enable" => "enable"
     );
 
     // constructs class instance

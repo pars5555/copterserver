@@ -8,6 +8,9 @@
                     {$fieldName}    
                 </th>
             {/foreach}
+            <th>
+                image
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -15,11 +18,19 @@
             <tr>
                 {foreach from=$ns.visible_fields_names item=fieldName}
                     <td>
-                        {$copter->$fieldName}    
+                        {if $fieldName=='id'}
+                            <a href="{$SITE_PATH}/admin/copter/{$copter->$fieldName}" target="_blank">{$copter->$fieldName}</a>
+                        {else}
+                            {$copter->$fieldName}    
+                        {/if}
                     </td>
                 {/foreach}
+                <td>
+                    <img src="{$SITE_PATH}/img/copters/{$copter->getUniqueId()}/1.jpg" style="max-width: 100px;max-height: 100px"/>    
+                </td>
             </tr>
         {/foreach}
+
     </tbody>
 </table>
 
