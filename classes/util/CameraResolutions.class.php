@@ -5,7 +5,6 @@ class CameraResolutions {
     public static $FPS = array(30, 25, 15, 10, 5, 2, 1);
     public static $RESOLUTIONS = array(
         "QQVGA (160x120)" => array(160, 120),
-        "HQVGA (240x160)" => array(240, 160),
         "QVGA (320x240)" => array(320, 240),
         "HVGA (480x320)" => array(480, 320),
         "VGA (640x480)" => array(640, 480),

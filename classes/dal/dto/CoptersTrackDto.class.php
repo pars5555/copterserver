@@ -7,17 +7,15 @@ require_once (CLASSES_PATH . "/framework/dal/dto/AbstractDto.class.php");
  *
  * @author	Arman Tshitoyan
  */
-class ActiveCoptersDto extends AbstractDto {
+class AdminDto extends AbstractDto {
 
     // Map of DB value to Field value
     protected $mapArray = array(
         "id" => "id",
-        "unique_id" => "uniqueId",
-        "name" => "name",
-        "ip" => "ip",
+        "copter_unique_id" => "copterUniqueId",
         "lng" => "lng",
         "lat" => "lat",
-        "enable" => "enable"
+        "datetime" => "datetime"
     );
 
     // constructs class instance

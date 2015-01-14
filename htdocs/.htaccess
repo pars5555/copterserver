@@ -7,6 +7,7 @@ RewriteRule ^admin/copter/(.*)$  /dyn/admin/main/$1/?page=copter [L,QSA]
 RewriteRule ^admin/?$  /dyn/admin/main/$1/?page=home [L,QSA]
 
 RewriteRule ^registerCopter$  /dyn/main/do_register_copter/$1/ [L,QSA]
+RewriteRule ^setCopterPosition$  /dyn/main/do_set_copter_position/$1/ [L,QSA]
 
 RewriteRule ^login$  /dyn/main/main/$1/?page=login [L,QSA]
 

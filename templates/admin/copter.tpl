@@ -1,6 +1,6 @@
 {include file="$TEMPLATE_DIR/admin/left_panel.tpl"} 
-<input type="hidden" id="copter_ip" value="{$ns.copter->getIp()}" >
-<input type="hidden" id="copter_id" value="{$ns.copter->getId()}" >
+<input type="hidden" id="copter_ip" value="{$ns.copter->getIp()}" />
+<input type="hidden" id="copter_id" value="{$ns.copter->getId()}"/> 
 <h2>{$ns.copter->getName()}</h2>
 
 Camera Resolution: <select id="camera_resolution">
@@ -16,8 +16,13 @@ Frames per second: <select id="camera_fps">
 
 <button id="startCameraStreamingBtn">Start Camera Streaming</button>
 <button id="stopCameraStreamingBtn">Stop Camera Streaming</button>
+<button id="startCameraRaspistillBtn">Start Camera Raspistill</button>
+<button id="stopCameraRaspistillBtn">Stop Camera Raspistill</button>
 
 <div>Status:<span id="copterStatus"></span></div>
 <div id="conectionLog"></div>
 
 <div id="copterCameraContainer"></div>
+<div id="copterCameraStillContainer"></div>
+
+<div style=" width:400px;height:300px; margin: 0; padding: 0;" id="map-canvas"></div>

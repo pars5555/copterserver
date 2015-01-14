@@ -36,6 +36,17 @@ class ActiveCoptersManager extends AbstractManager {
     }
 
 
+    public function setCopterLngLat($uniqueId, $lng, $lat) {
+        $dtos = $this->selectByField('unique_id', $uniqueId);
+        if (empty($dtos)) {
+            return false;
+        }
+        $dto = $dtos[0];
+        $dto->setLng($lng);
+        $dto->setLat($lat);
+        $this->updateByPk($dto);
+        return true;
+    }
     public function addCopter($uniqueId, $name, $ip) {
         $dto = $this->selectByField('unique_id', $uniqueId);
         if (empty($dto)) {

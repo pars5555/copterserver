@@ -26,3 +26,6 @@
 <script type="text/javascript" src="{$SITE_PATH}/js/out/ngs_actions.js?4_2_6"></script>
 <script type="text/javascript" src="{$SITE_PATH}/js/out/ngs_manager.js?4_2_6"></script>
 
+
+<script type="text/javascript" src="//maps.googleapis.com/maps/api/js?key=AIzaSyB2cb2JfoUBwaohp9Sn1WOwXlnrqV2u-p0"></script>
+
