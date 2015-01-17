@@ -1,17 +1,17 @@
-<?php /* Smarty version Smarty-3.1.11, created on 2015-01-14 17:45:44
+<?php /* Smarty version Smarty-3.1.11, created on 2015-01-15 00:03:02
          compiled from "D:\xampp\htdocs\copterserver\templates\admin\copter.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:1574254b67308eed474-87405726%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:153954b6cb76bc30a4-49516622%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     'ac3d6cfc249af47c1892011decbe8fb4614d6155' => 
     array (
       0 => 'D:\\xampp\\htdocs\\copterserver\\templates\\admin\\copter.tpl',
-      1 => 1421243142,
+      1 => 1421264249,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '1574254b67308eed474-87405726',
+  'nocache_hash' => '153954b6cb76bc30a4-49516622',
   'function' => 
   array (
   ),
@@ -24,9 +24,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1.11',
-  'unifunc' => 'content_54b67308f3f828_46173588',
+  'unifunc' => 'content_54b6cb76c27502_85288763',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_54b67308f3f828_46173588')) {function content_54b67308f3f828_46173588($_smarty_tpl) {?><?php if (!is_callable('smarty_function_html_options')) include 'D:/xampp/htdocs/copterserver/classes/lib/smarty/plugins\\function.html_options.php';
+<?php if ($_valid && !is_callable('content_54b6cb76c27502_85288763')) {function content_54b6cb76c27502_85288763($_smarty_tpl) {?><?php if (!is_callable('smarty_function_html_options')) include 'D:/xampp/htdocs/copterserver/classes/lib/smarty/plugins\\function.html_options.php';
 ?><?php echo $_smarty_tpl->getSubTemplate (((string)$_smarty_tpl->tpl_vars['TEMPLATE_DIR']->value)."/admin/left_panel.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null, array(), 0);?>
  
 <input type="hidden" id="copter_ip" value="<?php echo $_smarty_tpl->tpl_vars['ns']->value['copter']->getIp();?>
@@ -67,4 +67,17 @@ Frames per second: <select id="camera_fps">
 <div id="copterCameraContainer"></div>
 <div id="copterCameraStillContainer"></div>
 
-<div style=" width:400px;height:300px; margin: 0; padding: 0;" id="map-canvas"></div><?php }} ?>
+<div style=" width:400px;height:300px; margin: 0; padding: 0;" id="map-canvas"></div>
+
+
+
+  <div id="video-jwplayer_wrapper" style="position: relative; display: block; width: 640px; height: 480px;">
+      <object type="application/x-shockwave-flash" data="/jwplayer/jwplayer.flash.swf" width="100%" height="100%" bgcolor="#000000" id="video-jwplayer" name="video-jwplayer" tabindex="0">
+        <param name="allowfullscreen" value="true">
+        <param name="allowscriptaccess" value="always">
+        <param name="seamlesstabbing" value="true">
+        <param name="wmode" value="opaque">
+      </object>
+      <div id="video-jwplayer_aspect" style="display: none;"></div>
+      <div id="video-jwplayer_jwpsrv" style="position: absolute; top: 0px; z-index: 10;"></div>
+    </div><?php }} ?>
