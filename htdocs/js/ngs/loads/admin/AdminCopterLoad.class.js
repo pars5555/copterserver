@@ -19,6 +19,38 @@ ngs.AdminCopterLoad = Class.create(ngs.AbstractLoad, {
         this.initSocketConnection();
         this.initCameraStartStop();
         this.initGoogleMap();
+        this.initJwPlayer();
+    },
+    initJwPlayer:function(){
+    jwplayer('video-jwplayer').setup({
+      flashplayer:"/js/lib/jwplayer.flash.swf"
+      , file:"rtmp://" + "178.160.222.161" + "/flvplayback/flv:myStream.flv"
+      , autoStart: true
+      , rtmp:{
+        bufferlength:0.1
+      }
+      , deliveryType: "streaming"
+      , width: 640
+      , height: 480
+      , player: {
+        modes: {
+          linear: {
+            controls:{
+              stream:{
+                manage:false
+                , enabled: false
+              }
+            }
+          }
+        }
+      }
+      , shows: {
+        streamTimer: {
+          enabled: true
+          , tickRate: 100
+        }
+      }
+    });    
     },
     initGoogleMap: function () {
         var mapOptions = {

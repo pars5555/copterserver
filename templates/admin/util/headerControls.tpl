@@ -29,3 +29,4 @@
 
 <script type="text/javascript" src="//maps.googleapis.com/maps/api/js?key=AIzaSyB2cb2JfoUBwaohp9Sn1WOwXlnrqV2u-p0"></script>
 
+<script src="{$SITE_PATH}/js/lib/jwplayer.js"></script>
