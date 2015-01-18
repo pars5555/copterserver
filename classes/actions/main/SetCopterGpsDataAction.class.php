@@ -19,10 +19,12 @@ class SetCopterGpsDataAction extends BaseAction {
         if (empty($gps_data)) {
             $this->error(array('message' => 'Can not decode `gps_data_json` parameter!'));
         }
+        $lng = isset($gps_data->lng) ? $gps_data->lng : null;
+        $lat = isset($gps_data->lat) ? $gps_data->lat : null;
         $activeCoptersManager = ActiveCoptersManager::getInstance();
         $coptersTrackManager = CoptersTrackManager::getInstance();
-        $coptersTrackManager->addRow($unique_id, $gps_data->lng, $gps_data->lat);
-        $ret = $activeCoptersManager->setCopterLngLat($unique_id, $gps_data->lng, $gps_data->lat);
+        $coptersTrackManager->addRow($unique_id, $lng, $lat);
+        $ret = $activeCoptersManager->setCopterLngLat($unique_id, $lng, $lat);
         if ($ret === true) {
             $this->ok();
         } else {
