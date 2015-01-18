@@ -288,7 +288,7 @@ header{
     padding:10px;
     text-align: center;
 }
-.copters_table .ct_row .ct_cell:nth-child(odd){
+.copters_table .ct_row:nth-child(odd .ct_cell){
     background-color: #f9f9f9;
 }
 .copters_table .ct_row.ct_head .ct_cell{
