@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.11, created on 2015-01-15 00:03:02
+<?php /* Smarty version Smarty-3.1.11, created on 2015-01-18 17:23:26
          compiled from "D:\xampp\htdocs\copterserver\templates\admin\copter.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:153954b6cb76bc30a4-49516622%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'ac3d6cfc249af47c1892011decbe8fb4614d6155' => 
     array (
       0 => 'D:\\xampp\\htdocs\\copterserver\\templates\\admin\\copter.tpl',
-      1 => 1421264249,
+      1 => 1421587393,
       2 => 'file',
     ),
   ),
@@ -15,6 +15,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
+  'version' => 'Smarty-3.1.11',
+  'unifunc' => 'content_54b6cb76c27502_85288763',
   'variables' => 
   array (
     'ns' => 0,
@@ -23,8 +25,6 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'title' => 0,
   ),
   'has_nocache_code' => false,
-  'version' => 'Smarty-3.1.11',
-  'unifunc' => 'content_54b6cb76c27502_85288763',
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_54b6cb76c27502_85288763')) {function content_54b6cb76c27502_85288763($_smarty_tpl) {?><?php if (!is_callable('smarty_function_html_options')) include 'D:/xampp/htdocs/copterserver/classes/lib/smarty/plugins\\function.html_options.php';
 ?><?php echo $_smarty_tpl->getSubTemplate (((string)$_smarty_tpl->tpl_vars['TEMPLATE_DIR']->value)."/admin/left_panel.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null, array(), 0);?>
@@ -58,8 +58,7 @@ Frames per second: <select id="camera_fps">
 
 <button id="startCameraStreamingBtn">Start Camera Streaming</button>
 <button id="stopCameraStreamingBtn">Stop Camera Streaming</button>
-<button id="startCameraRaspistillBtn">Start Camera Raspistill</button>
-<button id="stopCameraRaspistillBtn">Stop Camera Raspistill</button>
+<button id="startEngine">StartEngine</button>
 
 <div>Status:<span id="copterStatus"></span></div>
 <div id="conectionLog"></div>
@@ -68,16 +67,4 @@ Frames per second: <select id="camera_fps">
 <div id="copterCameraStillContainer"></div>
 
 <div style=" width:400px;height:300px; margin: 0; padding: 0;" id="map-canvas"></div>
-
-
-
-  <div id="video-jwplayer_wrapper" style="position: relative; display: block; width: 640px; height: 480px;">
-      <object type="application/x-shockwave-flash" data="/jwplayer/jwplayer.flash.swf" width="100%" height="100%" bgcolor="#000000" id="video-jwplayer" name="video-jwplayer" tabindex="0">
-        <param name="allowfullscreen" value="true">
-        <param name="allowscriptaccess" value="always">
-        <param name="seamlesstabbing" value="true">
-        <param name="wmode" value="opaque">
-      </object>
-      <div id="video-jwplayer_aspect" style="display: none;"></div>
-      <div id="video-jwplayer_jwpsrv" style="position: absolute; top: 0px; z-index: 10;"></div>
-    </div><?php }} ?>
+<?php }} ?>

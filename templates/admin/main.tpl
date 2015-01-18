@@ -4,15 +4,19 @@
         {include file="$TEMPLATE_DIR/admin/util/headerControls.tpl"}
     </head>
     <body>
+            <header>
+                {include file="$TEMPLATE_DIR/admin/util/header.tpl"} 
+            </header>
         <div class="wrapper">
             <input type="hidden" id="initialLoad" name="initialLoad" value="admin_main" />		
             <input type="hidden" id="contentLoad" value="{$ns.contentLoad}" />
-            {include file="$TEMPLATE_DIR/admin/util/header.tpl"} 
             <div id="main_content">
                 {nest ns=content}
             </div>
-            {include file="$TEMPLATE_DIR/admin/util/footer.tpl"} 
 
         </div>
+            <footer>
+            {include file="$TEMPLATE_DIR/admin/util/footer.tpl"} 
+            </footer>
     </body>
 </html>

@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.11, created on 2015-01-18 15:43:50
+<?php /* Smarty version Smarty-3.1.11, created on 2015-01-18 17:28:20
          compiled from "D:\xampp\htdocs\copterserver\templates\admin\main.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:280154acfec57ce629-14540193%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '794facf27f7dd02ea7f9e5998e89cd53d3d96c2d' => 
     array (
       0 => 'D:\\xampp\\htdocs\\copterserver\\templates\\admin\\main.tpl',
-      1 => 1421581410,
+      1 => 1421587553,
       2 => 'file',
     ),
   ),
@@ -31,19 +31,23 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 
     </head>
     <body>
+            <header>
+                <?php echo $_smarty_tpl->getSubTemplate (((string)$_smarty_tpl->tpl_vars['TEMPLATE_DIR']->value)."/admin/util/header.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null, array(), 0);?>
+ 
+            </header>
         <div class="wrapper">
             <input type="hidden" id="initialLoad" name="initialLoad" value="admin_main" />		
             <input type="hidden" id="contentLoad" value="<?php echo $_smarty_tpl->tpl_vars['ns']->value['contentLoad'];?>
 " />
-            <?php echo $_smarty_tpl->getSubTemplate (((string)$_smarty_tpl->tpl_vars['TEMPLATE_DIR']->value)."/admin/util/header.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null, array(), 0);?>
- 
             <div id="main_content">
                 <?php echo smarty_function_nest(array('ns'=>'content'),$_smarty_tpl);?>
 
             </div>
-            <?php echo $_smarty_tpl->getSubTemplate (((string)$_smarty_tpl->tpl_vars['TEMPLATE_DIR']->value)."/admin/util/footer.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null, array(), 0);?>
- 
 
         </div>
+            <footer>
+            <?php echo $_smarty_tpl->getSubTemplate (((string)$_smarty_tpl->tpl_vars['TEMPLATE_DIR']->value)."/admin/util/footer.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null, array(), 0);?>
+ 
+            </footer>
     </body>
 </html><?php }} ?>

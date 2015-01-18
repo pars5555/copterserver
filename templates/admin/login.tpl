@@ -1,10 +1,20 @@
 <form method="POST" action="{$SITE_PATH}/dyn/admin/do_login">
-    <span>Username:</span><input  type="text" name="username"/>
-    <span>Password:</span><input type="password" name="password"/>  
-    {if isset($ns.error_message)}
-        <div class="error" >
-            {$ns.error_message}
+    <div class="login-wrapper">
+        <div class="form-group">
+            <label class="input_label">Username:</label>
+            <input class="text"  type="text" name="username"/>
         </div>
-    {/if}  
-    <input class="white-button" type="submit" />    
+        <div class="form-group">
+            <label class="input_label">Password:</label>
+            <input class="text" type="password" name="password"/>  
+        </div>
+        {if isset($ns.error_message)}
+            <div class="error" >
+                {$ns.error_message}
+            </div>
+        {/if}  
+        <div class="login_btn">
+            <input class="button blue" type="submit" value="Login" />    
+        </div>
+    </div>
 </form>
