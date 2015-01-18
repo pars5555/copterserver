@@ -140,7 +140,7 @@ label.input_label{
 
 .main_title{
     font-weight: 600;
-    color:#777;
+    color:#555;
     font-size:30px;
     margin-bottom:20px;
     text-align: center;
@@ -159,7 +159,7 @@ header{
 .main_logo{
     display:inline-block;
     float:left;
-    color:#3498db;
+    color:#777;
     font-weight: 600;
     font-size:40px;
 }
@@ -258,8 +258,9 @@ header{
     -o-transition: background-color 0.3s ease;
     transition: background-color 0.3s ease;
 }
-.left-panel ul li a:hover{
-    background-color:#3498DB;
+.left-panel ul li a:hover,
+.left-panel ul li a.selected{
+    background-color:#777;
     color:#fff;
     font-weight:600;
 }
@@ -291,21 +292,209 @@ header{
     background-color: #f9f9f9;
 }
 .copters_table .ct_row.ct_head .ct_cell{
-    background-color:#3498DB;
+    background-color:#777;
     color:#fff;
     font-weight: 600;
 }
 
-.copters_table .ct_row .ct_cell .current_copter{
-    color:#3498DB;
-    text-decoration: underline;
+.copters_table .ct_row .ct_cell .current_copter.button{
     display:inline-block;
-    padding:15px;
-    font-size: 17px;
+    width:100px;
+    margin: auto;
+}
+
+/*Current Cupter*/
+
+.right-content.current_copter{
+    display:table;
+    width:100%;
+    padding:0;
+}
+
+/*Copter Controls*/
+.copter_controls{
+    display:table-cell;
+    vertical-align: top;    
+    padding:10px;
+    width:33%;
+}
+.copter_controls .cc_table{
+    display:table;
+    width:100%;
+    margin-bottom:15px;
+    max-width: 500px;
+}
+.copter_controls .form-group{
+    display:table-cell;
+    vertical-align: middle;  
+    padding:0 15px;
+}
+.copter_controls .button{
+    display:inline-block;
+    margin:auto;
+}
+/*Copter Status*/
+.status{
+    margin-bottom:15px;
+    display:table;
+    width: 100%;
+}
+.copter_status_box{
+    display:table-cell;
+    vertical-align: middle;    
+    text-align: right;
+}
+.copter_status{
+    display:inline-block;
+    width:100px;
+    height:100px;
+    line-height: 100px;
+    border-radius: 50%;
+    font-size:15px;
+    font-weight: 600;
+    text-align: center;
+    background-color: #777;
+    border:1px solid #555;
+    color:#fff;
+    position: relative;
+}
+.copter_status .page_reload{
+    display:block;
+    width:30px;
+    height:30px;
+    margin-left:-15px;
+    position:absolute;
+    left:50%;
+    bottom:10px;
+    background:url(../../img/reload.png) no-repeat scroll 50% 50% / 100% transparent;
+}
+
+.copter_status.connected{
+    background-color: #59b210;
+    border:1px solid #399201;
+    color:#fff;    
+}
+
+.copter_status.error{
+    background-color: #cc0000;
+    border:1px solid #990000;
+    color:#fff;    
+}
+
+/*Copter Image*/
+
+.copter_image_box{
+    display:table-cell;
+    vertical-align: middle;    
+    text-align: left;
+}
+.copter_image{
+    display:inline-block;
+    vertical-align: middle;
+    width:100px;
+    height:100px;
+    background-position: 50% 50%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-radius: 50%;
+    overflow: hidden;
+}
+.status .main_title{
+    display:inline-block;
+    margin:0 0 0 20px;
 }
 
 
+/*Copter Engine*/
+.copter_engine{
+    display:table-cell;
+    vertical-align: top;    
+    padding:10px;
+    width:33%;
+}
 
+/*Copter Map*/
+.copter_map{
+    display:table-cell;
+    vertical-align: top;    
+    padding:10px;
+    width:33%;
+}
+
+.map_canvas{
+    height:300px;
+    margin-bottom:30px;
+    border: 1px solid #999;
+}
+
+/*Connection Log Messages*/
+
+.conection_log_box{
+    width:500px;
+    height:300px;
+    position:fixed;
+    top:100px;
+    right:-490px;
+    transition: all 0.5s ease;
+    z-index: 1000;
+    background-color:#fff;
+}
+
+.conection_log_box .con_log_btn{
+    position:absolute;
+    top:0;
+    left:-29px;
+    width:30px;
+    height:30px;
+    border:1px solid #999;
+    border-right-color:#fff;
+    cursor: pointer;
+    border-radius:5px 0px 0px 5px;
+    background:url(../../img/left_arrow.png) no-repeat scroll 50% 50% / 100% transparent;    
+}
+.conection_log_box.opened{
+    right:0;
+}
+.conection_log_box.opened .con_log_btn{
+    background-image:url(../../img/right_arrow.png);
+}
+
+.conection_log_box .conectionLog{
+    padding:15px;
+    height:calc(100% - 30px);
+    overflow: auto;
+    border:1px solid #999;
+}
+
+.conection_log_box .conectionLog .my_message{
+    width:80%;
+    padding:5px;
+    background-color:#ddd;
+    float:right;
+    clear: both;
+    margin-bottom:15px;
+    border-radius: 5px;
+}
+.conection_log_box .conectionLog .copter_log_img{
+    float: left;
+    clear: both;
+    width:30px;
+    height:30px;
+    margin-right:5px;
+    background-position: 50% 50%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-radius: 50%;
+    overflow: hidden;
+}
+.conection_log_box .conectionLog .copter_message{
+    width:80%;
+    padding:5px;
+    background-color:#aaa;
+    float: left;
+    margin-bottom:15px;
+    border-radius: 5px;
+}
 
 
 

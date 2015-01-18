@@ -26,6 +26,7 @@ abstract class BaseValidLoad extends AbstractLoad {
         $this->addParam('userGroupsUser', UserGroups::$USER);
         $this->addParam('userGroupsGuest', UserGroups::$GUEST);
         $this->addParam('userGroupsAdmin', UserGroups::$ADMIN);
+        $this->addParam("load_name", isset($_REQUEST['page'])?$_REQUEST['page']:"");
     }
 
     public function getDefaultLoads($args) {

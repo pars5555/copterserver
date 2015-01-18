@@ -19,7 +19,7 @@
                         {foreach from=$ns.visible_fields_names item=fieldName}
                             <div class="ct_cell">
                                 {if $fieldName=='id'}
-                                    <a class="current_copter" href="{$SITE_PATH}/admin/copter/{$copter->$fieldName}" target="_blank">{$copter->$fieldName}</a>
+                                    <a class="current_copter button grey" href="{$SITE_PATH}/admin/copter/{$copter->$fieldName}" target="_blank">Open</a>
                                 {else}
                                     {$copter->$fieldName}    
                                 {/if}

@@ -19,6 +19,7 @@ ngs.AdminCopterLoad = Class.create(ngs.AbstractLoad, {
         this.initSocketConnection();
         this.initCameraStartStop();
         this.initGoogleMap();
+        this.connectionLogToggle();
     },
     initGoogleMap: function () {
         var mapOptions = {
@@ -64,28 +65,43 @@ ngs.AdminCopterLoad = Class.create(ngs.AbstractLoad, {
     },
     sendJsonMessage: function (object)
     {
+
+        jQuery('#conectionLog').append("<p class='my_message'>" + JSON.stringify(object) + "</p>");
+        jQuery("#conectionLog").scrollTop(1E10);
         this.socket.send(JSON.stringify(object));
     },
     initSocketConnection: function () {
+        var copter_img = jQuery("#copter_image").attr("style");
         var copter_ip = jQuery('#copter_ip').val();
         this.socket = new WebSocket("ws://" + copter_ip + ":6789/");
         var thisInstance = this;
         this.socket.onopen = function () {
-            jQuery('#copterStatus').html('conected');
+            jQuery('#copterStatusText').html('conected');
+            jQuery('#copterStatus').addClass("connected").removeClass("error");
             thisInstance.connected = true;
         };
         this.socket.onmessage = function (message) {
-            jQuery('#conectionLog').html(jQuery('#conectionLog').html() + '<br>' + message.data);
+            jQuery('#conectionLog').append("<div class='copter_log_img' style="+copter_img+">" + message.data + "</div>");
+            jQuery('#conectionLog').append("<p class='copter_message'>" + message.data + "</p>");
+            jQuery("#conectionLog").scrollTop(1E10);
         };
         this.socket.onclose = function () {
-            var cameraSettings = thisInstance.getCameraSettings();
-            ngs.load('admin_copter', {'copter_id': jQuery('#copter_id').val(), camera_resolution: (cameraSettings[0]+"_"+ cameraSettings[1]), camera_fps: cameraSettings[2]});
+            jQuery('#copterStatusText').html('closed');
+            jQuery('#copterStatus').removeClass("connected").removeClass("error");
+            jQuery("#page_reload").removeClass("hide");
             thisInstance.connected = false;
         };
         this.socket.onerror = function () {
-            jQuery('#copterStatus').html('error');
+            jQuery('#copterStatusText').html('error');
+            jQuery('#copterStatus').addClass("error").removeClass("connected");
             thisInstance.connected = false;
         };
+    },
+    connectionLogToggle: function () {
+        jQuery(".f_con_log_btn").click(function () {
+            jQuery(".f_conection_log_box").toggleClass("opened");
+            jQuery("#conectionLog").scrollTop(1E10);
+        });
     }
 
 });

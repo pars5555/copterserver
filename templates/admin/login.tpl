@@ -14,7 +14,7 @@
             </div>
         {/if}  
         <div class="login_btn">
-            <input class="button blue" type="submit" value="Login" />    
+            <input class="button grey" type="submit" value="Login" />    
         </div>
     </div>
 </form>
