@@ -6,7 +6,7 @@ require_once(CLASSES_PATH . "/managers/CoptersTrackManager.class.php");
 
 class SetCopterGpsDataAction extends BaseAction {
 
-    public function service() {
+    public function service() {       
         if (!isset($_REQUEST['unique_id'])) {
             $this->error(array('message' => 'Missing `unique_id` parameter!'));
         }
@@ -15,9 +15,9 @@ class SetCopterGpsDataAction extends BaseAction {
         }
         $unique_id = $this->secure($_REQUEST['unique_id']);
         $gps_data_json = $this->secure($_REQUEST['gps_data_json']);
-        $gps_data = json_decode($gps_data_json);
+        $gps_data = json_decode(htmlspecialchars_decode($gps_data_json));
         if (empty($gps_data)) {
-            $this->error(array('message' => 'Can not decode `gps_data_json` parameter!'));
+            $this->error(array('message' => 'Can not decode `gps_data_json` parameter!: '.$gps_data_json ));
         }
         $lng = isset($gps_data->lng) ? $gps_data->lng : null;
         $lat = isset($gps_data->lat) ? $gps_data->lat : null;

@@ -79,7 +79,7 @@ ngs.AdminCopterLoad = Class.create(ngs.AbstractLoad, {
         };
         this.socket.onclose = function () {
             var cameraSettings = thisInstance.getCameraSettings();
-            ngs.load('admin_copter', {'copter_id': jQuery('#copter_id').val(), camera_resolution: [cameraSettings[0], cameraSettings[1]], camera_fps: cameraSettings[2]});
+            ngs.load('admin_copter', {'copter_id': jQuery('#copter_id').val(), camera_resolution: (cameraSettings[0]+"_"+ cameraSettings[1]), camera_fps: cameraSettings[2]});
             thisInstance.connected = false;
         };
         this.socket.onerror = function () {
