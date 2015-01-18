@@ -47,6 +47,17 @@ class ActiveCoptersManager extends AbstractManager {
         $this->updateByPk($dto);
         return true;
     }
+    
+    
+    public function getCopterByUniqueId($uniqueId) {
+        $dto = $this->selectByField('unique_id', $uniqueId);
+        if (!empty($dto ))
+        {
+            return $dto[0];
+        }
+        return null;
+        
+    }
     public function addCopter($uniqueId, $name, $ip) {
         $dto = $this->selectByField('unique_id', $uniqueId);
         if (empty($dto)) {

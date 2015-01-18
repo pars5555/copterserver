@@ -10,7 +10,7 @@ ngs.AdminCopterLoad = Class.create(ngs.AbstractLoad, {
         return "POST";
     },
     getContainer: function () {
-        return "content";
+        return "main_content";
     },
     getName: function () {
         return "admin_copter";
@@ -19,38 +19,6 @@ ngs.AdminCopterLoad = Class.create(ngs.AbstractLoad, {
         this.initSocketConnection();
         this.initCameraStartStop();
         this.initGoogleMap();
-        this.initJwPlayer();
-    },
-    initJwPlayer:function(){
-    jwplayer('video-jwplayer').setup({
-      flashplayer:"/js/lib/jwplayer.flash.swf"
-      , file:"rtmp://" + "178.160.222.161" + "/flvplayback/flv:myStream.flv"
-      , autoStart: true
-      , rtmp:{
-        bufferlength:0.1
-      }
-      , deliveryType: "streaming"
-      , width: 640
-      , height: 480
-      , player: {
-        modes: {
-          linear: {
-            controls:{
-              stream:{
-                manage:false
-                , enabled: false
-              }
-            }
-          }
-        }
-      }
-      , shows: {
-        streamTimer: {
-          enabled: true
-          , tickRate: 100
-        }
-      }
-    });    
     },
     initGoogleMap: function () {
         var mapOptions = {
@@ -60,30 +28,28 @@ ngs.AdminCopterLoad = Class.create(ngs.AbstractLoad, {
         var map = new google.maps.Map(document.getElementById('map-canvas'),
                 mapOptions);
     },
+    getCameraSettings: function () {
+        var ret = new Array();
+        var resolution = jQuery('#camera_resolution').val();
+        var width = parseInt(resolution.split('_')[0]);
+        ret.push(width);
+        var height = parseInt(resolution.split('_')[1]);
+        ret.push(height);
+        var fps = parseInt(jQuery('#camera_fps').val());
+        ret.push(fps);
+        return ret;
+    },
     initCameraStartStop: function () {
         var thisInstance = this;
+        var cameraSettings = thisInstance.getCameraSettings();
+        ngs.load('admin_vlc_player', {'copter_id': jQuery('#copter_id').val(), width: cameraSettings[0], height: cameraSettings[1]});
         jQuery('#startCameraStreamingBtn').click(function () {
             if (thisInstance.connected == true) {
-                var resolution = jQuery('#camera_resolution').val();
-                var width = parseInt(resolution.split('_')[0]);
-                var height = parseInt(resolution.split('_')[1]);
-                var fps = parseInt(jQuery('#camera_fps').val());
-                thisInstance.sendJsonMessage({command: 'camera start streaming', width: width, height: height, fps: fps});
+                var cameraSettings = thisInstance.getCameraSettings();
+                thisInstance.sendJsonMessage({command: 'camera start streaming', width: cameraSettings[0], height: cameraSettings[1], fps: cameraSettings[2]});
                 window.setTimeout(function () {
-                    ngs.load('admin_vlc_player', {'copter_id': jQuery('#copter_id').val(), width: width, height: height});
+                    ngs.load('admin_vlc_player', {'copter_id': jQuery('#copter_id').val(), width: cameraSettings[0], height: cameraSettings[1]});
                 }, 5000);
-            } else {
-                alert('no connection to device.');
-            }
-        });
-        jQuery('#startCameraRaspistillBtn').click(function () {
-            if (thisInstance.connected == true) {
-                var resolution = jQuery('#camera_resolution').val();
-                var width = parseInt(resolution.split('_')[0]);
-                var height = parseInt(resolution.split('_')[1]);
-                var fps = parseInt(jQuery('#camera_fps').val());
-                thisInstance.sendJsonMessage({command: 'camera start raspistill', width: width, height: height, fps: fps});
-                ngs.load('admin_jpg_stream', {'copter_id': jQuery('#copter_id').val(), width: width, height: height});
             } else {
                 alert('no connection to device.');
             }
@@ -95,20 +61,11 @@ ngs.AdminCopterLoad = Class.create(ngs.AbstractLoad, {
                 alert('no connection to device.');
             }
         });
-        jQuery('#stopCameraRaspistillBtn').click(function () {
-            if (thisInstance.connected == true) {
-                thisInstance.sendJsonMessage({command: 'camera stop raspistill'});
-            } else {
-                alert('no connection to device.');
-            }
-        });
-    }
-    ,
+    },
     sendJsonMessage: function (object)
     {
         this.socket.send(JSON.stringify(object));
-    }
-    ,
+    },
     initSocketConnection: function () {
         var copter_ip = jQuery('#copter_ip').val();
         this.socket = new WebSocket("ws://" + copter_ip + ":6789/");
@@ -121,15 +78,14 @@ ngs.AdminCopterLoad = Class.create(ngs.AbstractLoad, {
             jQuery('#conectionLog').html(jQuery('#conectionLog').html() + '<br>' + message.data);
         };
         this.socket.onclose = function () {
-            jQuery('#copterStatus').html('closed');
+            var cameraSettings = thisInstance.getCameraSettings();
+            ngs.load('admin_copter', {'copter_id': jQuery('#copter_id').val(), camera_resolution: [cameraSettings[0], cameraSettings[1]], camera_fps: cameraSettings[2]});
             thisInstance.connected = false;
         };
         this.socket.onerror = function () {
             jQuery('#copterStatus').html('error');
             thisInstance.connected = false;
         };
-
-        //   socket.send("sss");
     }
 
 });

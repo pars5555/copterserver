@@ -20,7 +20,19 @@ class RegisterCopterAction extends BaseAction {
         $unique_id = $this->secure($_REQUEST['unique_id']);
         $activeCoptersManager = ActiveCoptersManager::getInstance();
         $activeCoptersManager->addCopter($unique_id, $name, $copter_ip);
-        $this->ok();
+        $copter = $activeCoptersManager->getCopterByUniqueId($unique_id);
+        if ($copter ->getIp() !== $copter_ip)
+        {
+            $this->error(array('message' => 'Server error: Could not save the copter! Please try again'));
+        }
+        $fp = @fSockOpen($copter_ip, 22, $errno, $errstr, 3);
+        if ($fp !== false) {
+            $this->ok();
+            fclose($fp);
+        } else {
+            $this->error(array('message' => 'IP address is not reachable!'));
+        }
+        $this->error(array('message' => 'Unknown Error!!! IP is not reachable.'));
     }
 
 }

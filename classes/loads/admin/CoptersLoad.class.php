@@ -23,7 +23,7 @@ class CoptersLoad extends BaseAdminLoad {
         $activeCoptersManager = ActiveCoptersManager::getInstance();
         foreach ($allCoptersDtos as $copterDto) {
             $ip = $copterDto->getIp();
-            $fp = fSockOpen($ip, 22, $errno, $errstr, 3);
+            $fp = @fSockOpen($ip, 22, $errno, $errstr, 3);
             if ($fp !== false) {
                 $copterDto->setEnable(1);
                 fclose($fp);

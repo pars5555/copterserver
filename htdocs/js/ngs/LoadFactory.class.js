@@ -8,7 +8,7 @@ ngs.LoadFactory.prototype={
 		
 		
         //admin
-        this.loads["admin_main"] = function temp(){return new ngs.AdminMainLoad("admin_main", ajaxLoader);};
+                this.loads["admin_main"] = function temp(){return new ngs.AdminMainLoad("admin_main", ajaxLoader);};
 		this.loads["admin_home"] = function temp(){return new ngs.AdminHomeLoad("admin_home", ajaxLoader);};
 		this.loads["admin_copter"] = function temp(){return new ngs.AdminCopterLoad("admin_copter", ajaxLoader);};
 		this.loads["admin_copters"] = function temp(){return new ngs.AdminCoptersLoad("admin_copters", ajaxLoader);};

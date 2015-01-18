@@ -8,7 +8,7 @@
             <input type="hidden" id="initialLoad" name="initialLoad" value="admin_main" />		
             <input type="hidden" id="contentLoad" value="{$ns.contentLoad}" />
             {include file="$TEMPLATE_DIR/admin/util/header.tpl"} 
-            <div class="dentist-panel-right-wrapper">
+            <div id="main_content">
                 {nest ns=content}
             </div>
             {include file="$TEMPLATE_DIR/admin/util/footer.tpl"} 
