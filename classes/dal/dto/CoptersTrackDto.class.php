@@ -7,7 +7,7 @@ require_once (CLASSES_PATH . "/framework/dal/dto/AbstractDto.class.php");
  *
  * @author	Arman Tshitoyan
  */
-class AdminDto extends AbstractDto {
+class CoptersTrackDto extends AbstractDto {
 
     // Map of DB value to Field value
     protected $mapArray = array(

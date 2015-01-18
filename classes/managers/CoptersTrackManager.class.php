@@ -43,6 +43,7 @@ class CoptersTrackManager extends AbstractManager {
         $dto->setLat($lat);
         $dto->setDatetime(date('Y-m-d H:i:s'));
         $this->insertDto($dto);
+        return true;
     }
 
 }
