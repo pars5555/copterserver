@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.11, created on 2015-01-18 17:28:20
+<?php /* Smarty version Smarty-3.1.11, created on 2015-01-18 17:47:05
          compiled from "D:\xampp\htdocs\copterserver\templates\admin\util\headerControls.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:1813454acfec5825cd6-12910053%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '8b34a8653873b871753c0a242be0ae501f4c99c2' => 
     array (
       0 => 'D:\\xampp\\htdocs\\copterserver\\templates\\admin\\util\\headerControls.tpl',
-      1 => 1421587393,
+      1 => 1421588799,
       2 => 'file',
     ),
   ),
@@ -25,7 +25,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_54acfec5842c36_84553504')) {function content_54acfec5842c36_84553504($_smarty_tpl) {?><!-- NGS Theme Styles -->
+<?php if ($_valid && !is_callable('content_54acfec5842c36_84553504')) {function content_54acfec5842c36_84553504($_smarty_tpl) {?><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<!-- NGS Theme Styles -->
 <link rel="stylesheet" type="text/css" href="<?php echo $_smarty_tpl->tpl_vars['SITE_PATH']->value;?>
 /css/admin/style.css?<?php echo $_smarty_tpl->tpl_vars['VERSION']->value;?>
 " />
