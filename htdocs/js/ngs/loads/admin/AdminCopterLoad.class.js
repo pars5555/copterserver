@@ -20,6 +20,39 @@ ngs.AdminCopterLoad = Class.create(ngs.AbstractLoad, {
         this.initCameraStartStop();
         this.initGoogleMap();
         this.connectionLogToggle();
+        this.initJwPlayer();
+    },
+    initJwPlayer: function () {
+        var copter_ip = jQuery('#copter_ip').val();
+        jwplayer('video-jwplayer').setup({
+            flashplayer: "/js/lib/jwplayer/jwplayer.flash.swf"
+            , file: "rtmp://" + copter_ip + "/flvplayback/flv:myStream.flv"
+            , autoStart: true
+            , rtmp: {
+                bufferlength: 0.1
+            }
+            , deliveryType: "streaming"
+            , width: 640
+            , height: 480
+            , player: {
+                modes: {
+                    linear: {
+                        controls: {
+                            stream: {
+                                manage: false
+                                , enabled: false
+                            }
+                        }
+                    }
+                }
+            }
+            , shows: {
+                streamTimer: {
+                    enabled: true
+                    , tickRate: 100
+                }
+            }
+        });
     },
     initGoogleMap: function () {
         var mapOptions = {
@@ -81,7 +114,7 @@ ngs.AdminCopterLoad = Class.create(ngs.AbstractLoad, {
             thisInstance.connected = true;
         };
         this.socket.onmessage = function (message) {
-            jQuery('#conectionLog').append("<div class='copter_log_img' style="+copter_img+">" + message.data + "</div>");
+            jQuery('#conectionLog').append("<div class='copter_log_img' style=" + copter_img + ">" + message.data + "</div>");
             jQuery('#conectionLog').append("<p class='copter_message'>" + message.data + "</p>");
             jQuery("#conectionLog").scrollTop(1E10);
         };
