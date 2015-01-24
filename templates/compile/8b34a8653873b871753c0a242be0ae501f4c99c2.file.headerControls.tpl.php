@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.11, created on 2015-01-18 17:47:05
+<?php /* Smarty version Smarty-3.1.11, created on 2015-01-24 12:05:20
          compiled from "D:\xampp\htdocs\copterserver\templates\admin\util\headerControls.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:1813454acfec5825cd6-12910053%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '8b34a8653873b871753c0a242be0ae501f4c99c2' => 
     array (
       0 => 'D:\\xampp\\htdocs\\copterserver\\templates\\admin\\util\\headerControls.tpl',
-      1 => 1421588799,
+      1 => 1422085466,
       2 => 'file',
     ),
   ),
@@ -75,7 +75,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 /js/out/ngs_manager.js?4_2_6"></script>
 
 
+
 <script type="text/javascript" src="//maps.googleapis.com/maps/api/js?key=AIzaSyB2cb2JfoUBwaohp9Sn1WOwXlnrqV2u-p0"></script>
 
 <script src="<?php echo $_smarty_tpl->tpl_vars['SITE_PATH']->value;?>
-/js/lib/jwplayer.js"></script><?php }} ?>
+/js/lib/jwplayer/jwplayer.js"></script><?php }} ?>

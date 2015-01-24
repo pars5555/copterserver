@@ -21,6 +21,7 @@ ngs.AdminCopterLoad = Class.create(ngs.AbstractLoad, {
         this.initGoogleMap();
         this.connectionLogToggle();
         this.initJwPlayer();
+        this.initGpioFunctionality();
     },
     initJwPlayer: function () {
         var copter_ip = jQuery('#copter_ip').val();
@@ -134,6 +135,42 @@ ngs.AdminCopterLoad = Class.create(ngs.AbstractLoad, {
         jQuery(".f_con_log_btn").click(function () {
             jQuery(".f_conection_log_box").toggleClass("opened");
             jQuery("#conectionLog").scrollTop(1E10);
+        });
+    },
+    initGpioFunctionality: function () {
+        var self = this;
+        jQuery("#pin_on").click(function () {
+            var pin_value = parseInt(jQuery("#pin_num").val());
+            var param = {
+                command:"gpio",
+                action:"set_pin_state",
+                pin_number:pin_value,
+                pin_state:1
+            };
+            self.sendJsonMessage(param);
+        });
+        jQuery("#pin_off").click(function () {
+            var pin_value = parseInt(jQuery("#pin_num").val());
+            var param = {
+                command:"gpio",
+                action:"set_pin_state",
+                pin_number:pin_value,
+                pin_state:0
+            };
+            self.sendJsonMessage(param);
+        });
+        jQuery("#send_puls_btn").click(function(){
+            var duration = parseInt(jQuery("#duration").val());
+            var state = parseInt(jQuery("#state").val());
+            var pin_value = parseInt(jQuery("#pin_num").val());
+            var param = {
+                command:"gpio",
+                action:"pulse",
+                pin_number:pin_value,
+                duration_milliseconds:duration,
+                pin_state:state
+            };
+            self.sendJsonMessage(param);
         });
     }
 

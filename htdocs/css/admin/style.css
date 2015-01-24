@@ -146,6 +146,18 @@ label.input_label{
     text-align: center;
 }
 
+.table{
+    display:table;
+    width: 100%;
+}
+.table-row{
+    display: table-row;
+}
+.table-cell{
+    display: table-cell;
+    vertical-align: middle;
+}
+
 /*****************************************************************************************/
 /***************************************** HEADER ****************************************/
 /*****************************************************************************************/
@@ -474,13 +486,27 @@ header{
     clear: both;
     margin-bottom:15px;
     border-radius: 5px;
+    position: relative;
+    word-wrap: break-word;
+}
+
+.conection_log_box .conectionLog .my_message:before {
+    border-bottom: 7px solid transparent;
+    border-left: 7px solid #ddd;
+    border-top: 7px solid transparent;
+    content: "";
+    height: 0;
+    right: -7px;
+    position: absolute;
+    top: 5px;
+    width: 0;
 }
 .conection_log_box .conectionLog .copter_log_img{
     float: left;
     clear: both;
     width:30px;
     height:30px;
-    margin-right:5px;
+    margin-right:10px;
     background-position: 50% 50%;
     background-size: cover;
     background-repeat: no-repeat;
@@ -494,6 +520,19 @@ header{
     float: left;
     margin-bottom:15px;
     border-radius: 5px;
+    position: relative;
+}
+
+.conection_log_box .conectionLog .copter_message:before {
+    border-bottom: 7px solid transparent;
+    border-right: 7px solid #aaa;
+    border-top: 7px solid transparent;
+    content: "";
+    height: 0;
+    left: -7px;
+    position: absolute;
+    top: 5px;
+    width: 0;
 }
 
 
@@ -520,3 +559,24 @@ footer{
 
 
 
+/*****************************************************************************************/
+/***************************************** GPIO CONTROLS ****************************************/
+/*****************************************************************************************/
+
+.gpio_ctrl_table .table-cell{
+    vertical-align: bottom;
+    width: 33%;
+    padding:0 10px;
+}
+.pin_ctrl .form-group{
+    display: inline-block;
+}
+.pin_ctrl .button{
+    display:inline-block;
+    margin: 0 0 0 15px;
+    width:70px;
+}
+
+.gpio_ctrl_table .button{
+    margin: auto;   
+}

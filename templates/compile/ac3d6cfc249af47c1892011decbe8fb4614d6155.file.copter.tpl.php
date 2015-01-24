@@ -1,17 +1,17 @@
-<?php /* Smarty version Smarty-3.1.11, created on 2015-01-18 21:19:04
+<?php /* Smarty version Smarty-3.1.11, created on 2015-01-24 17:20:51
          compiled from "D:\xampp\htdocs\copterserver\templates\admin\copter.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:634654bbeb08eeda25-81513529%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:2397854c39c33b17bc1-30148416%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     'ac3d6cfc249af47c1892011decbe8fb4614d6155' => 
     array (
       0 => 'D:\\xampp\\htdocs\\copterserver\\templates\\admin\\copter.tpl',
-      1 => 1421601454,
+      1 => 1422104963,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '634654bbeb08eeda25-81513529',
+  'nocache_hash' => '2397854c39c33b17bc1-30148416',
   'function' => 
   array (
   ),
@@ -25,9 +25,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1.11',
-  'unifunc' => 'content_54bbeb09047a21_60244731',
+  'unifunc' => 'content_54c39c33c021f5_98624511',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_54bbeb09047a21_60244731')) {function content_54bbeb09047a21_60244731($_smarty_tpl) {?><?php if (!is_callable('smarty_function_html_options')) include 'D:/xampp/htdocs/copterserver/classes/lib/smarty/plugins\\function.html_options.php';
+<?php if ($_valid && !is_callable('content_54c39c33c021f5_98624511')) {function content_54c39c33c021f5_98624511($_smarty_tpl) {?><?php if (!is_callable('smarty_function_html_options')) include 'D:/xampp/htdocs/copterserver/classes/lib/smarty/plugins\\function.html_options.php';
 ?><div class="main_content">
     <input type="hidden" id="copter_ip" value="<?php echo $_smarty_tpl->tpl_vars['ns']->value['copter']->getIp();?>
 " />
@@ -104,6 +104,20 @@ $_smarty_tpl->tpl_vars['width_height_array']->_loop = true;
             </div>
 
             <div id="copterCameraContainer"></div>
+
+
+
+            <div id="video-jwplayer_wrapper" style="position: relative; display: block; width: 160px; height: 120px;">
+                <object type="application/x-shockwave-flash" data="/jwplayer/jwplayer.flash.swf" width="100%" height="100%" bgcolor="#000000" id="video-jwplayer" name="video-jwplayer" tabindex="0">
+                    <param name="allowfullscreen" value="true">
+                    <param name="allowscriptaccess" value="always">
+                    <param name="seamlesstabbing" value="true">
+                    <param name="wmode" value="opaque">
+                </object>
+                <div id="video-jwplayer_aspect" style="display: none;"></div>
+                <div id="video-jwplayer_jwpsrv" style="position: absolute; top: 0px; z-index: 10;"></div>
+            </div>
+
         </div>
 
         <div class="copter_engine">
@@ -114,6 +128,65 @@ $_smarty_tpl->tpl_vars['width_height_array']->_loop = true;
         <div class="copter_map">
             <h2 class="main_title">Map</h2>
             <div class="map_canvas" id="map-canvas"></div>
+            <h2 class="main_title">GPIO Control</h2>
+            <div class="gpio_control">
+                <form autocomplete="off">
+                    <div class="pin_ctrl">
+                        <div class="form-group">
+                            <label class="input_label">PIN</label>
+                            <div class="select_wrapper">
+                                <select id="pin_num">
+                                    <option value="0">0</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                    <option value="13">13</option>
+                                    <option value="14">14</option>
+                                    <option value="15">15</option>
+                                    <option value="16">16</option>
+                                    <option value="17">17</option>
+                                    <option value="18">18</option>
+                                    <option value="19">19</option>
+                                </select>
+                            </div>
+                        </div>
+                        <a href="javascript:void(0)" id="pin_on" class="button grey ">On</a>
+                        <a href="javascript:void(0)" id="pin_off" class="button grey">Off</a>
+                    </div>
+                    <div class="table gpio_ctrl_table">
+                        <div class="table-cell">
+                            <div class="form-group">
+                                <label class="input_label">Duration</label>
+                                <input id="duration" class="text" type="number" min="0" value="0">
+                            </div>
+                        </div>
+                        <div class="table-cell">
+                            <div class="form-group">
+                                <label class="input_label">State</label>
+                                <div class="select_wrapper">
+                                    <select id="state">
+                                        <option value="0">off</option>
+                                        <option value="1">on</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="table-cell">
+                            <a href="javascript:void(0)" id="send_puls_btn" class="button grey">Puls</a>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
         </div>
     </div>
 </div>
