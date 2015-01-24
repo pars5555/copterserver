@@ -535,9 +535,28 @@ header{
     width: 0;
 }
 
+/*Connection Error Message*/
 
+.connection_error_message{
+    background-image: linear-gradient(#ee0000, #aa0000);
+    border-radius: 100px;
+    color: #fff;
+    font-size: 20px;
+    font-weight: 600;
+    height: 100px;
+    left: 50%;
+    line-height: 140px;
+    position: fixed;
+    text-align: center;
+    top: -100px;
+    transform: translate(-50%, 0px);
+    transition: all 0.5s ease 0s;
+    width: 300px;
+}
 
-
+.connection_error_message.visible{
+    top:-50px;
+}
 
 
 

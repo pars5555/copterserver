@@ -79,30 +79,34 @@ ngs.AdminCopterLoad = Class.create(ngs.AbstractLoad, {
         var cameraSettings = thisInstance.getCameraSettings();
         ngs.load('admin_vlc_player', {'copter_id': jQuery('#copter_id').val(), width: cameraSettings[0], height: cameraSettings[1]});
         jQuery('#startCameraStreamingBtn').click(function () {
-            if (thisInstance.connected == true) {
-                var cameraSettings = thisInstance.getCameraSettings();
-                thisInstance.sendJsonMessage({command: 'camera start streaming', width: cameraSettings[0], height: cameraSettings[1], fps: cameraSettings[2]});
+
+            var cameraSettings = thisInstance.getCameraSettings();
+            var res = thisInstance.sendJsonMessage({command: 'camera start streaming', width: cameraSettings[0], height: cameraSettings[1], fps: cameraSettings[2]});
+            if (res == true) {
                 window.setTimeout(function () {
                     ngs.load('admin_vlc_player', {'copter_id': jQuery('#copter_id').val(), width: cameraSettings[0], height: cameraSettings[1]});
                 }, 5000);
-            } else {
-                alert('no connection to device.');
             }
         });
         jQuery('#stopCameraStreamingBtn').click(function () {
-            if (thisInstance.connected == true) {
-                thisInstance.sendJsonMessage({command: 'camera stop streaming'});
-            } else {
-                alert('no connection to device.');
+            var res = thisInstance.sendJsonMessage({command: 'camera stop streaming'});
+            if (res == true) {
+                thisInstance.cameraStateMessage('successfully disconnected.', "success");
             }
         });
     },
     sendJsonMessage: function (object)
     {
-
-        jQuery('#conectionLog').append("<p class='my_message'>" + JSON.stringify(object) + "</p>");
-        jQuery("#conectionLog").scrollTop(1E10);
-        this.socket.send(JSON.stringify(object));
+        if (this.connected == true) {
+            jQuery('#conectionLog').append("<p class='my_message'>" + JSON.stringify(object) + "</p>");
+            jQuery("#conectionLog").scrollTop(1E10);
+            this.socket.send(JSON.stringify(object));
+            return true;
+        } else {
+            jQuery("#connection_error_message").addClass("visible");
+            setTimeout(function(){jQuery("#connection_error_message").removeClass("visible")},1000);
+            return false;
+        }
     },
     initSocketConnection: function () {
         var copter_img = jQuery("#copter_image").attr("style");
@@ -142,33 +146,32 @@ ngs.AdminCopterLoad = Class.create(ngs.AbstractLoad, {
         jQuery("#pin_on").click(function () {
             var pin_value = parseInt(jQuery("#pin_num").val());
             var param = {
-                command:"gpio",
-                action:"set_pin_state",
-                pin_number:pin_value,
-                pin_state:1
+                command: "gpio",
+                action: "set_pin_state",
+                pin_number: pin_value,
+                pin_state: 1
             };
             self.sendJsonMessage(param);
         });
         jQuery("#pin_off").click(function () {
             var pin_value = parseInt(jQuery("#pin_num").val());
             var param = {
-                command:"gpio",
-                action:"set_pin_state",
-                pin_number:pin_value,
-                pin_state:0
+                command: "gpio",
+                action: "set_pin_state",
+                pin_number: pin_value,
+                pin_state: 0
             };
             self.sendJsonMessage(param);
         });
-        jQuery("#send_puls_btn").click(function(){
+        jQuery("#send_puls_btn").click(function () {
             var duration = parseInt(jQuery("#duration").val());
-            var state = parseInt(jQuery("#state").val());
             var pin_value = parseInt(jQuery("#pin_num").val());
             var param = {
-                command:"gpio",
-                action:"pulse",
-                pin_number:pin_value,
-                duration_milliseconds:duration,
-                pin_state:state
+                command: "gpio",
+                action: "pulse",
+                pin_number: pin_value,
+                duration_milliseconds: duration
+
             };
             self.sendJsonMessage(param);
         });

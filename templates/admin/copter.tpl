@@ -1,4 +1,9 @@
 <div class="main_content">
+    
+    <div class="connection_error_message" id="connection_error_message">
+        <span>No connection</span>
+    </div>
+
     <input type="hidden" id="copter_ip" value="{$ns.copter->getIp()}" />
     <input type="hidden" id="copter_id" value="{$ns.copter->getId()}"/>
     <input type="hidden" id="copter_unique_id" value="{$ns.copter->getUniqueId()}"/>
@@ -90,7 +95,7 @@
                             <div class="select_wrapper">
                                 <select id="pin_num">
                                     <option value="0">0</option>
-                                    <option value="1">1</option>
+                                    <option value="1" selected>1</option>
                                     <option value="2">2</option>
                                     <option value="3">3</option>
                                     <option value="4">4</option>
@@ -119,20 +124,9 @@
                         <div class="table-cell">
                             <div class="form-group">
                                 <label class="input_label">Duration</label>
-                                <input id="duration" class="text" type="number" min="0" value="0">
+                                <input id="duration" class="text" type="number" min="0" value="500">
                             </div>
-                        </div>
-                        <div class="table-cell">
-                            <div class="form-group">
-                                <label class="input_label">State</label>
-                                <div class="select_wrapper">
-                                    <select id="state">
-                                        <option value="0">off</option>
-                                        <option value="1">on</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
+                        </div>                        
                         <div class="table-cell">
                             <a href="javascript:void(0)" id="send_puls_btn" class="button grey">Puls</a>
                         </div>
