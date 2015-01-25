@@ -20,6 +20,7 @@ ngs.AdminCopterLoad = Class.create(ngs.AbstractLoad, {
         this.initCameraStartStop();
         this.initGoogleMap();
         this.connectionLogToggle();
+        this.initGpioFunctionality();
     },
     initGoogleMap: function () {
         var mapOptions = {
@@ -65,26 +66,51 @@ ngs.AdminCopterLoad = Class.create(ngs.AbstractLoad, {
             }
         });
         jQuery('#stopCameraStreamingBtn').click(function () {
-            var res = thisInstance.sendJsonMessage({command: ngs.Constants.CAMERA_STOP_STREAMING_COMMAND});
-            if (res == true) {
-                thisInstance.cameraStateMessage('successfully disconnected.', "success");
-            }
+            thisInstance.sendJsonMessage({command: ngs.Constants.CAMERA_COMMAND, action: ngs.Constants.CAMERA_STOP_STREAMING_COMMAND});
         });
     },
-    sendJsonMessage: function (object)
+    sendJsonMessage: function (object, showInMessageBar)
     {
+        if (typeof showInMessageBar === 'undefined')
+        {
+            showInMessageBar = true;
+        }
         if (this.connected == true) {
-            jQuery('#conectionLog').append("<p class='my_message'>" + JSON.stringify(object) + "</p>");
-            jQuery("#conectionLog").scrollTop(1E10);
+            if (showInMessageBar == true) {
+                jQuery('#conectionLog').append("<p class='my_message'>" + JSON.stringify(object) + "</p>");
+                jQuery("#conectionLog").scrollTop(1E10);
+            }
             this.socket.send(JSON.stringify(object));
             return true;
         } else {
-            jQuery("#connection_error_message").addClass("visible");
-            setTimeout(function () {
-                jQuery("#connection_error_message").removeClass("visible")
-            }, 1000);
+            this.showNoConnectionBaloon();
             return false;
         }
+    },
+    showNoConnectionBaloon: function ()
+    {
+        jQuery("#connection_error_message").addClass("visible");
+        setTimeout(function () {
+            jQuery("#connection_error_message").removeClass("visible")
+        }, 1000);
+    },
+    hideNoConnectionBaloon: function ()
+    {
+        jQuery("#connection_error_message").removeClass("visible")
+    },
+    sendPingPongCommand: function () {
+        var pingId = this.makeRandomId();
+        this.sendJsonMessage({'command': ngs.Constants.PING_COMMAND, "ping_id": pingId}, false);
+        var thisInstance = this;
+        window.setTimeout(function () {
+            if (thisInstance.response_ping_id !== pingId) {
+                jQuery('body').css({'background': "red"});
+            } else
+            {
+                jQuery('body').css({'background': "white"});
+            }
+            thisInstance.sendPingPongCommand();
+        }, 1000);
     },
     initSocketConnection: function () {
         var copter_img = jQuery("#copter_image").attr("style");
@@ -94,9 +120,16 @@ ngs.AdminCopterLoad = Class.create(ngs.AbstractLoad, {
         this.socket.onopen = function () {
             jQuery('#copterStatusText').html('conected');
             jQuery('#copterStatus').addClass("connected").removeClass("error");
+            thisInstance.sendPingPongCommand();
             thisInstance.connected = true;
         };
         this.socket.onmessage = function (message) {
+            var jsonResponse = jQuery.parseJSON(message.data);
+            if (typeof jsonResponse.ping_id !== "undefined")
+            {
+                thisInstance.response_ping_id = jsonResponse.ping_id;
+                return false;
+            }
             jQuery('#conectionLog').append("<div class='copter_log_img' style=" + copter_img + ">" + message.data + "</div>");
             jQuery('#conectionLog').append("<p class='copter_message'>" + message.data + "</p>");
             jQuery("#conectionLog").scrollTop(1E10);
@@ -119,13 +152,21 @@ ngs.AdminCopterLoad = Class.create(ngs.AbstractLoad, {
             jQuery("#conectionLog").scrollTop(1E10);
         });
     },
+    makeRandomId: function ()
+    {
+        var text = "";
+        var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        for (var i = 0; i < 5; i++)
+            text += possible.charAt(Math.floor(Math.random() * possible.length));
+        return text;
+    },
     initGpioFunctionality: function () {
         var self = this;
         jQuery("#pin_on").click(function () {
             var pin_value = parseInt(jQuery("#pin_num").val());
             var param = {
                 command: ngs.Constants.GPIO_COMMAND,
-                action: "set_pin_state",
+                action: ngs.Constants.GPIO_SET_PIN_STATE_ACTION,
                 pin_number: pin_value,
                 pin_state: 1
             };
@@ -135,7 +176,7 @@ ngs.AdminCopterLoad = Class.create(ngs.AbstractLoad, {
             var pin_value = parseInt(jQuery("#pin_num").val());
             var param = {
                 command: ngs.Constants.GPIO_COMMAND,
-                action: "set_pin_state",
+                action: ngs.Constants.GPIO_SET_PIN_STATE_ACTION,
                 pin_number: pin_value,
                 pin_state: 0
             };
@@ -146,7 +187,7 @@ ngs.AdminCopterLoad = Class.create(ngs.AbstractLoad, {
             var pin_value = parseInt(jQuery("#pin_num").val());
             var param = {
                 command: ngs.Constants.GPIO_COMMAND,
-                action: "pulse",
+                action: ngs.Constants.GPIO_PULSE_ACTION,
                 pin_number: pin_value,
                 duration_milliseconds: duration
 
