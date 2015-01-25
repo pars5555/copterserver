@@ -9,7 +9,7 @@ ngs.AdminVlcPlayerLoad = Class.create(ngs.AbstractLoad, {
         return "POST";
     },
     getContainer: function () {
-        return "copterCameraContainer";
+        return "copterVlcContainer";
     },
     getName: function () {
         return "admin_vlc_player";

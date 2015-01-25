@@ -20,40 +20,6 @@ ngs.AdminCopterLoad = Class.create(ngs.AbstractLoad, {
         this.initCameraStartStop();
         this.initGoogleMap();
         this.connectionLogToggle();
-        this.initJwPlayer();
-        this.initGpioFunctionality();
-    },
-    initJwPlayer: function () {
-        var copter_ip = jQuery('#copter_ip').val();
-        jwplayer('video-jwplayer').setup({
-            flashplayer: "/js/lib/jwplayer/jwplayer.flash.swf"
-            , file: "rtmp://" + copter_ip + "/flvplayback/flv:myStream.flv"
-            , autoStart: true
-            , rtmp: {
-                bufferlength: 0.1
-            }
-            , deliveryType: "streaming"
-            , width: 640
-            , height: 480
-            , player: {
-                modes: {
-                    linear: {
-                        controls: {
-                            stream: {
-                                manage: false
-                                , enabled: false
-                            }
-                        }
-                    }
-                }
-            }
-            , shows: {
-                streamTimer: {
-                    enabled: true
-                    , tickRate: 100
-                }
-            }
-        });
     },
     initGoogleMap: function () {
         var mapOptions = {
@@ -78,18 +44,28 @@ ngs.AdminCopterLoad = Class.create(ngs.AbstractLoad, {
         var thisInstance = this;
         var cameraSettings = thisInstance.getCameraSettings();
         ngs.load('admin_vlc_player', {'copter_id': jQuery('#copter_id').val(), width: cameraSettings[0], height: cameraSettings[1]});
+        ngs.load('admin_jw_player', {'copter_id': jQuery('#copter_id').val(), width: cameraSettings[0], height: cameraSettings[1]});
         jQuery('#startCameraStreamingBtn').click(function () {
 
             var cameraSettings = thisInstance.getCameraSettings();
-            var res = thisInstance.sendJsonMessage({command: 'camera start streaming', width: cameraSettings[0], height: cameraSettings[1], fps: cameraSettings[2]});
+            var res = thisInstance.sendJsonMessage({command: ngs.Constants.CAMERA_COMMAND, action: ngs.Constants.CAMERA_START_HTTP_STREMING_ACTION, width: cameraSettings[0], height: cameraSettings[1], fps: cameraSettings[2]});
             if (res == true) {
                 window.setTimeout(function () {
                     ngs.load('admin_vlc_player', {'copter_id': jQuery('#copter_id').val(), width: cameraSettings[0], height: cameraSettings[1]});
+                }, 7000);
+            }
+        });
+        jQuery('#startCameraStreamingRtmpBtn').click(function () {
+            var cameraSettings = thisInstance.getCameraSettings();
+            var res = thisInstance.sendJsonMessage({command: ngs.Constants.CAMERA_COMMAND, action: ngs.Constants.CAMERA_START_RTMP_STREAMING_ACTION, width: cameraSettings[0], height: cameraSettings[1], fps: cameraSettings[2]});
+            if (res == true) {
+                window.setTimeout(function () {
+                    ngs.load('admin_jw_player', {'copter_id': jQuery('#copter_id').val(), width: cameraSettings[0], height: cameraSettings[1]});
                 }, 5000);
             }
         });
         jQuery('#stopCameraStreamingBtn').click(function () {
-            var res = thisInstance.sendJsonMessage({command: 'camera stop streaming'});
+            var res = thisInstance.sendJsonMessage({command: ngs.Constants.CAMERA_STOP_STREAMING_COMMAND});
             if (res == true) {
                 thisInstance.cameraStateMessage('successfully disconnected.', "success");
             }
@@ -104,7 +80,9 @@ ngs.AdminCopterLoad = Class.create(ngs.AbstractLoad, {
             return true;
         } else {
             jQuery("#connection_error_message").addClass("visible");
-            setTimeout(function(){jQuery("#connection_error_message").removeClass("visible")},1000);
+            setTimeout(function () {
+                jQuery("#connection_error_message").removeClass("visible")
+            }, 1000);
             return false;
         }
     },
@@ -146,7 +124,7 @@ ngs.AdminCopterLoad = Class.create(ngs.AbstractLoad, {
         jQuery("#pin_on").click(function () {
             var pin_value = parseInt(jQuery("#pin_num").val());
             var param = {
-                command: "gpio",
+                command: ngs.Constants.GPIO_COMMAND,
                 action: "set_pin_state",
                 pin_number: pin_value,
                 pin_state: 1
@@ -156,7 +134,7 @@ ngs.AdminCopterLoad = Class.create(ngs.AbstractLoad, {
         jQuery("#pin_off").click(function () {
             var pin_value = parseInt(jQuery("#pin_num").val());
             var param = {
-                command: "gpio",
+                command: ngs.Constants.GPIO_COMMAND,
                 action: "set_pin_state",
                 pin_number: pin_value,
                 pin_state: 0
@@ -167,7 +145,7 @@ ngs.AdminCopterLoad = Class.create(ngs.AbstractLoad, {
             var duration = parseInt(jQuery("#duration").val());
             var pin_value = parseInt(jQuery("#pin_num").val());
             var param = {
-                command: "gpio",
+                command: ngs.Constants.GPIO_COMMAND,
                 action: "pulse",
                 pin_number: pin_value,
                 duration_milliseconds: duration

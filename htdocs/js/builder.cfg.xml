@@ -45,6 +45,7 @@
                 <file>ngs/util/UrlObserver.class.js</file>
                 <file>ngs/util/UrlFormater.class.js</file>
                 <file>ngs/util/crc32.js</file>
+                <file>ngs/util/constants.js</file>
                 <file>ngs/util/UrlChangeEventObserver.class.js</file>
             </files>
         </input >
@@ -65,7 +66,7 @@
                 <file>ngs/loads/admin/AdminCopterLoad.class.js</file>
                 <file>ngs/loads/admin/AdminCoptersLoad.class.js</file>
                 <file>ngs/loads/admin/AdminVlcPlayerLoad.class.js</file>
-                <file>ngs/loads/admin/AdminJpgStreamLoad.class.js</file>
+                <file>ngs/loads/admin/AdminJwPlayerLoad.class.js</file>
             </files>
         </input>
     </builder>
