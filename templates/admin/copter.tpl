@@ -110,6 +110,7 @@
                         </div>
                         <a href="javascript:void(0)" id="pin_on" class="button grey ">On</a>
                         <a href="javascript:void(0)" id="pin_off" class="button grey">Off</a>
+                        <a href="javascript:void(0)" id="pin_on_if_hold_btn" class="button grey">On if hold</a>
                     </div>
                     <div class="table gpio_ctrl_table">
                         <div class="table-cell">

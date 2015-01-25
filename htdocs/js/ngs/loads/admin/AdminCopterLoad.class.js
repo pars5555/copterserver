@@ -194,6 +194,26 @@ ngs.AdminCopterLoad = Class.create(ngs.AbstractLoad, {
             };
             self.sendJsonMessage(param);
         });
+
+        jQuery('#pin_on_if_hold_btn').mousedown(function () {
+            var pin_value = parseInt(jQuery("#pin_num").val());
+            var param = {
+                command: ngs.Constants.GPIO_COMMAND,
+                action: ngs.Constants.GPIO_SET_PIN_STATE_ACTION,
+                pin_number: pin_value,
+                pin_state: 1
+            };
+            self.sendJsonMessage(param);
+        }).on('mouseup mouseleave', function () {
+            var pin_value = parseInt(jQuery("#pin_num").val());
+            var param = {
+                command: ngs.Constants.GPIO_COMMAND,
+                action: ngs.Constants.GPIO_SET_PIN_STATE_ACTION,
+                pin_number: pin_value,
+                pin_state: 0
+            };
+            self.sendJsonMessage(param);
+        });
     }
 
 });
