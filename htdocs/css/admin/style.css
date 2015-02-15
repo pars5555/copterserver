@@ -439,6 +439,83 @@ header{
     border: 1px solid #999;
 }
 
+/*Accelerometer & Geroskop*/
+
+.mpu_control>div{
+    margin-bottom:15px;
+}
+
+.mpu_control .mpu_label{
+    display:inline-block;
+    vertical-align: middle;
+    font-weight:600;
+    color:#555;
+}
+
+.mpu_control .button{
+    display: inline-block;
+    margin: auto auto auto 15px;
+    padding: 9px 15px;
+    vertical-align: middle;
+    width: auto;
+}
+
+/*Accelerometer State*/
+.accelerometer_state{
+    height:100px;
+}
+.accelerometer_state .cube {
+    perspective: 1000px;
+    font-size: 50px;
+    width: 2em;
+    transform-style: preserve-3d;
+    transform: rotateX(0deg) rotateY(0deg);
+}
+
+.accelerometer_state .side {
+    position: absolute;
+    width: 2em;
+    height: 0.6em;
+    background: rgba(255, 99, 71, 0.6);
+    border: 1px solid rgba(0, 0, 0, 0.5);
+
+
+}
+.accelerometer_state .top.side,
+.accelerometer_state .bottom.side {
+    height: 2em;
+}
+
+
+.accelerometer_state .front {
+    transform: translateZ(1em);
+}
+
+.accelerometer_state .top{
+    transform: rotateX(90deg) translateZ(1em);
+ 
+}
+
+.accelerometer_state .top.side{
+    background: url('../../img/copters/topview.jpg') no-repeat scroll 50% 50% / cover transparent; 
+}
+
+.accelerometer_state .right {
+    transform: rotateY(90deg) translateZ(1em);
+}
+
+.accelerometer_state .left {
+    transform: rotateY(-90deg) translateZ(1em);
+}
+
+.accelerometer_state .bottom {
+    transform: rotateX(-90deg) translateZ(-0.4em);
+}
+
+.accelerometer_state .back {
+    transform: rotateY(-180deg) translateZ(1em);
+}
+
 /*Connection Log Messages*/
 
 .conection_log_box{
@@ -593,7 +670,8 @@ footer{
 .pin_ctrl .button{
     display:inline-block;
     margin: 0 0 0 15px;
-    width:70px;
+    width:auto;
+    padding:9px 15px;
 }
 
 .gpio_ctrl_table .button{

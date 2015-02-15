@@ -7,5 +7,10 @@ ngs.Constants = {
     CAMERA_COMMAND: "camera",
     CAMERA_START_HTTP_STREMING_ACTION: "http_start_streaming",
     CAMERA_START_RTMP_STREAMING_ACTION: "rtmp_start_streaming",
+    MPU_COMMAND: "mpu",
+    SET_ACCELEROMETER_ON_ACTION: "set_accelerometer_on",
+    SET_ACCELEROMETER_OFF_ACTION: "set_accelerometer_off",
+    SET_GYO_ON_ACTION: "set_gyro_on",
+    SET_GYO_OFF_ACTION: "set_gyro_off",
     CAMERA_STOP_STREAMING_COMMAND: "stop_streaming"
 }

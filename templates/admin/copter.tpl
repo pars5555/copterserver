@@ -1,5 +1,5 @@
 <div class="main_content">
-    
+
     <div class="connection_error_message" id="connection_error_message">
         <span>No connection</span>
     </div>
@@ -77,6 +77,29 @@
         <div class="copter_map">
             <h2 class="main_title">Map</h2>
             <div class="map_canvas" id="map-canvas"></div>
+            <h2 class="main_title">MPU 9150</h2>
+            <div class="mpu_control">
+                <div>
+                    <span class="mpu_label">Accelerometer:</span>
+                    <a href="javascript:void(0)" id="accel_on" class="button grey ">On</a>
+                    <a href="javascript:void(0)" id="accel_off" class="button grey">Off</a>
+                </div>
+                <div class="accelerometer_state">
+                    <div class="cube">
+                        <div class="side  front"></div>
+                        <div class="side   back"></div>
+                        <div class="side  right"></div>
+                        <div class="side   left"></div>
+                        <div class="side    top"></div>
+                        <div class="side bottom"></div>
+                    </div>
+                </div>
+                <div>
+                    <span class="mpu_label">Gyroscope:</span>
+                    <a href="javascript:void(0)" id="gyro_on" class="button grey ">On</a>
+                    <a href="javascript:void(0)" id="gyro_off" class="button grey">Off</a>
+                </div>
+            </div>
             <h2 class="main_title">GPIO Control</h2>
             <div class="gpio_control">
                 <form autocomplete="off">

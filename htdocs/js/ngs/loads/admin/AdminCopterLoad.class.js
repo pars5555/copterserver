@@ -21,6 +21,7 @@ ngs.AdminCopterLoad = Class.create(ngs.AbstractLoad, {
         this.initGoogleMap();
         this.connectionLogToggle();
         this.initGpioFunctionality();
+        this.initMpuFunctionality();
     },
     initGoogleMap: function () {
         var mapOptions = {
@@ -91,12 +92,12 @@ ngs.AdminCopterLoad = Class.create(ngs.AbstractLoad, {
     {
         jQuery("#connection_error_message").addClass("visible");
         setTimeout(function () {
-            jQuery("#connection_error_message").removeClass("visible")
+            jQuery("#connection_error_message").removeClass("visible");
         }, 1000);
     },
     hideNoConnectionBaloon: function ()
     {
-        jQuery("#connection_error_message").removeClass("visible")
+        jQuery("#connection_error_message").removeClass("visible");
     },
     sendPingPongCommand: function () {
         var pingId = this.makeRandomId();
@@ -128,6 +129,11 @@ ngs.AdminCopterLoad = Class.create(ngs.AbstractLoad, {
             if (typeof jsonResponse.ping_id !== "undefined")
             {
                 thisInstance.response_ping_id = jsonResponse.ping_id;
+                return false;
+            }
+            if (typeof jsonResponse.accelX !== "undefined" || typeof jsonResponse.gyroX !== "undefined")
+            {
+                jQuery('.accelerometer_state .cube').css({'transform': 'rotateX('+jsonResponse.accelX+'deg) rotateZ('+(-jsonResponse.accelY)+'deg)'});
                 return false;
             }
             jQuery('#conectionLog').append("<div class='copter_log_img' style=" + copter_img + ">" + message.data + "</div>");
@@ -214,6 +220,36 @@ ngs.AdminCopterLoad = Class.create(ngs.AbstractLoad, {
             };
             self.sendJsonMessage(param);
         });
+    },
+    initMpuFunctionality: function () {
+        var self = this;
+        jQuery("#accel_on").click(function () {
+            var param = {
+                command: ngs.Constants.MPU_COMMAND,
+                action: ngs.Constants.SET_ACCELEROMETER_ON_ACTION
+            };
+            self.sendJsonMessage(param);
+        });
+        jQuery("#accel_off").click(function () {
+            var param = {
+                command: ngs.Constants.MPU_COMMAND,
+                action: ngs.Constants.SET_ACCELEROMETER_OFF_ACTION
+            };
+            self.sendJsonMessage(param);
+        });
+        jQuery("#gyro_on").click(function () {
+            var param = {
+                command: ngs.Constants.MPU_COMMAND,
+                action: ngs.Constants.SET_GYO_ON_ACTION
+            };
+            self.sendJsonMessage(param);
+        });
+        jQuery("#gyro_off").click(function () {
+            var param = {
+                command: ngs.Constants.MPU_COMMAND,
+                action: ngs.Constants.SET_GYO_OFF_ACTION
+            };
+            self.sendJsonMessage(param);
+        });
     }
-
 });
