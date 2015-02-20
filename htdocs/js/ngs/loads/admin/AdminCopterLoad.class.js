@@ -22,6 +22,16 @@ ngs.AdminCopterLoad = Class.create(ngs.AbstractLoad, {
         this.connectionLogToggle();
         this.initGpioFunctionality();
         this.initMpuFunctionality();
+	this.initRebootButton();
+    },
+    initRebootButton:function(){
+        var self = this;
+        jQuery('#copter_reboot').click(function(){
+            var param = {
+                command: ngs.Constants.REBOOT_COMMAND                
+            };
+            self.sendJsonMessage(param);
+        });
     },
     initGoogleMap: function () {
         var mapOptions = {

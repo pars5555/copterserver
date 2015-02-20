@@ -5,6 +5,7 @@ ngs.Constants = {
     GPIO_SET_PIN_STATE_ACTION: "set_pin_state",
     GPIO_TOGGLE_PIN_STATE_ACTION: "toggle_pin_state",
     CAMERA_COMMAND: "camera",
+    REBOOT_COMMAND: "reboot",
     CAMERA_START_HTTP_STREMING_ACTION: "http_start_streaming",
     CAMERA_START_RTMP_STREAMING_ACTION: "rtmp_start_streaming",
     MPU_COMMAND: "mpu",

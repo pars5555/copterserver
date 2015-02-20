@@ -14,6 +14,8 @@
             <h2 class="main_title">{$ns.copter->getName()}</h2>
         </div> 
         <div class="copter_status_box">
+ <a class="button grey" id="copter_reboot" >Reboot Copter</a>
+
             <div class="copter_status" id="copterStatus">
                 <span id="copterStatusText">Connecting...</span>
                 <a class="page_reload hide" id="page_reload" href="{$SITE_PATH}/admin/copter/{$ns.copter->getId()}"></a>
