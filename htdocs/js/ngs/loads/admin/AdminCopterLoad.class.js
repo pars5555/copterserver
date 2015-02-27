@@ -18,18 +18,18 @@ ngs.AdminCopterLoad = Class.create(ngs.AbstractLoad, {
     afterLoad: function () {
         //this.initSocketConnection();
         this.initCameraStartStop();
-       // this.initGoogleMap();
+        // this.initGoogleMap();
         this.connectionLogToggle();
         this.initGpioFunctionality();
         this.initMpuFunctionality();
-	this.initRebootButton();
-	this.engineControlButton();
+        this.initRebootButton();
+        this.engineControlButton();
     },
-    initRebootButton:function(){
+    initRebootButton: function () {
         var self = this;
-        jQuery('#copter_reboot').click(function(){
+        jQuery('#copter_reboot').click(function () {
             var param = {
-                command: ngs.Constants.REBOOT_COMMAND                
+                command: ngs.Constants.REBOOT_COMMAND
             };
             self.sendJsonMessage(param);
         });
@@ -144,7 +144,7 @@ ngs.AdminCopterLoad = Class.create(ngs.AbstractLoad, {
             }
             if (typeof jsonResponse.accelX !== "undefined" || typeof jsonResponse.gyroX !== "undefined")
             {
-                jQuery('.accelerometer_state .cube').css({'transform': 'rotateX('+jsonResponse.accelX+'deg) rotateZ('+(-jsonResponse.accelY)+'deg)'});
+                jQuery('.accelerometer_state .cube').css({'transform': 'rotateX(' + jsonResponse.accelX + 'deg) rotateZ(' + (-jsonResponse.accelY) + 'deg)'});
                 return false;
             }
             jQuery('#conectionLog').append("<div class='copter_log_img' style=" + copter_img + ">" + message.data + "</div>");
@@ -251,48 +251,37 @@ ngs.AdminCopterLoad = Class.create(ngs.AbstractLoad, {
         jQuery("#gyro_on").click(function () {
             var param = {
                 command: ngs.Constants.MPU_COMMAND,
-                action: ngs.Constants.SET_GYO_ON_ACTION
+                action: ngs.Constants.SET_GYRO_ON_ACTION
             };
             self.sendJsonMessage(param);
         });
         jQuery("#gyro_off").click(function () {
             var param = {
                 command: ngs.Constants.MPU_COMMAND,
-                action: ngs.Constants.SET_GYO_OFF_ACTION
+                action: ngs.Constants.SET_GYRO_OFF_ACTION
             };
             self.sendJsonMessage(param);
         });
     },
-    engineControlButton : function(){
-        jQuery(".f_ec_btn").click(function(){
-              var position = jQuery(this).position();
-          var circleWidth = jQuery(this).width();
-          var circleHeight = jQuery(this).width();
-          var y = -parseInt(position.top+circleHeight/2)+100;
-          var x =  parseInt(position.left+circleWidth/2)-100;
-          var distance = Math.sqrt(x*x+y*y);
-          var angle = Math.atan(x/y)*180;
-          console.log(x,y);
+    engineControlButton: function () {
+        var copter2DControl1 = new Copter2DControl();
+        copter2DControl1.init("throttle_yaw_container");
+        copter2DControl1.addXListener(function (x) {
+            jQuery('#throttle_yaw_values').html("Yaw: "+copter2DControl1.getX() + "; Throttle: " + copter2DControl1.getY());
         });
-        
-        jQuery(".f_ec_btn").draggable({
-            containment: "parent",
-      start: function(e) {
-      },
-      drag: function(e) {
-             var position = jQuery(this).position();
-          var circleWidth = jQuery(this).width();
-          var circleHeight = jQuery(this).width();
-          var y = -parseInt(position.top+circleHeight/2)+100;
-          var x =  parseInt(position.left+circleWidth/2)-100;
-          var distance = Math.sqrt(x*x+y*y);
-          var angle = Math.atan(y/x)*180/Math.PI;
-         
-           // jQuery(this.dragobject).y 
-          console.log( jQuery(this.dragobject).x );
-      },
-      stop: function(e) {
-      }
-    });
+        copter2DControl1.addYListener(function (y) {
+
+            jQuery('#throttle_yaw_values').html("Yaw: "+ copter2DControl1.getX() + "; Throttle: " + copter2DControl1.getY());
+        });
+
+        var copter2DControl2 = new Copter2DControl();
+        copter2DControl2.init("pitch_roll_container");
+        copter2DControl2.addXListener(function (x) {
+            jQuery('#pitch_roll_values').html("Roll: "+copter2DControl2.getX() + "; Pitch: " + copter2DControl2.getY());
+        });
+        copter2DControl2.addYListener(function (y) {
+            jQuery('#pitch_roll_values').html("Roll: "+copter2DControl2.getX() + "; Pitch: " + copter2DControl2.getY());
+        });
     }
+
 });

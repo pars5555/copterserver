@@ -1,17 +1,17 @@
-<?php /* Smarty version Smarty-3.1.11, created on 2015-02-26 21:38:51
+<?php /* Smarty version Smarty-3.1.11, created on 2015-02-27 16:02:54
          compiled from "D:\xampp\htdocs\copterserver\templates\admin\copter.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:3187354ef5a2be33709-92750797%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:1788554f05ceee2c159-40700020%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     'ac3d6cfc249af47c1892011decbe8fb4614d6155' => 
     array (
       0 => 'D:\\xampp\\htdocs\\copterserver\\templates\\admin\\copter.tpl',
-      1 => 1424972263,
+      1 => 1425038549,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '3187354ef5a2be33709-92750797',
+  'nocache_hash' => '1788554f05ceee2c159-40700020',
   'function' => 
   array (
   ),
@@ -25,9 +25,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1.11',
-  'unifunc' => 'content_54ef5a2bf067a1_54543821',
+  'unifunc' => 'content_54f05ceee8ee12_04558391',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_54ef5a2bf067a1_54543821')) {function content_54ef5a2bf067a1_54543821($_smarty_tpl) {?><?php if (!is_callable('smarty_function_html_options')) include 'D:/xampp/htdocs/copterserver/classes/lib/smarty/plugins\\function.html_options.php';
+<?php if ($_valid && !is_callable('content_54f05ceee8ee12_04558391')) {function content_54f05ceee8ee12_04558391($_smarty_tpl) {?><?php if (!is_callable('smarty_function_html_options')) include 'D:/xampp/htdocs/copterserver/classes/lib/smarty/plugins\\function.html_options.php';
 ?><div class="main_content">
 
     <div class="connection_error_message" id="connection_error_message">
@@ -122,15 +122,21 @@ $_smarty_tpl->tpl_vars['width_height_array']->_loop = true;
             <h2 class="main_title">Control</h2>
             <button class="button grey" id="startEngine">StartEngine</button>
             <div class="engine_controls">
-                <div class="ec_block">
+                <div class="ec_block" id="throttle_yaw_container" >
                     <div class="x_line"></div>
                     <div class="y_line"></div>
+                    <div class="ec_btn f_ec_btn_real" style="display:none"></div>
                     <div class="ec_btn f_ec_btn"></div>
                 </div>
-                <div class="ec_block">
+                <div class="ec_block"  id="pitch_roll_container">
                     <div class="x_line"></div>
                     <div class="y_line"></div>                    
-                    <div class="ec_btn f_ec_btn"></div>
+                    <div class="ec_btn f_ec_btn_real" style="display: none"></div>
+                    <div class="ec_btn f_ec_btn" ></div>
+                </div>
+                <div >
+                    <div id="throttle_yaw_values"></div>
+                    <div id="pitch_roll_values"></div>                    
                 </div>
             </div>
         </div>

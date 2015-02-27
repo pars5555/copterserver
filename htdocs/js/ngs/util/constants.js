@@ -11,7 +11,12 @@ ngs.Constants = {
     MPU_COMMAND: "mpu",
     SET_ACCELEROMETER_ON_ACTION: "set_accelerometer_on",
     SET_ACCELEROMETER_OFF_ACTION: "set_accelerometer_off",
-    SET_GYO_ON_ACTION: "set_gyro_on",
-    SET_GYO_OFF_ACTION: "set_gyro_off",
+    SET_GYRO_ON_ACTION: "set_gyro_on",
+    SET_GYRO_OFF_ACTION: "set_gyro_off",
+    ENGINE_COMMAND: "engine",
+    SET_THROTTLE: "set_throttle",
+    SET_YAW: "set_yaw",
+    SET_ROLL: "set_roll",
+    SET_PITCH: "set_pitch",
     CAMERA_STOP_STREAMING_COMMAND: "stop_streaming"
-}
+};

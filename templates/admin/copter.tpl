@@ -75,15 +75,21 @@
             <h2 class="main_title">Control</h2>
             <button class="button grey" id="startEngine">StartEngine</button>
             <div class="engine_controls">
-                <div class="ec_block">
+                <div class="ec_block" id="throttle_yaw_container" >
                     <div class="x_line"></div>
                     <div class="y_line"></div>
+                    <div class="ec_btn f_ec_btn_real" style="display:none"></div>
                     <div class="ec_btn f_ec_btn"></div>
                 </div>
-                <div class="ec_block">
+                <div class="ec_block"  id="pitch_roll_container">
                     <div class="x_line"></div>
                     <div class="y_line"></div>                    
-                    <div class="ec_btn f_ec_btn"></div>
+                    <div class="ec_btn f_ec_btn_real" style="display: none"></div>
+                    <div class="ec_btn f_ec_btn" ></div>
+                </div>
+                <div >
+                    <div id="throttle_yaw_values"></div>
+                    <div id="pitch_roll_values"></div>                    
                 </div>
             </div>
         </div>

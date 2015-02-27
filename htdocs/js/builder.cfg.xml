@@ -46,6 +46,7 @@
                 <file>ngs/util/UrlFormater.class.js</file>
                 <file>ngs/util/crc32.js</file>
                 <file>ngs/util/constants.js</file>
+                <file>ngs/util/Copter2DControl.class.js</file>
                 <file>ngs/util/UrlChangeEventObserver.class.js</file>
             </files>
         </input >
