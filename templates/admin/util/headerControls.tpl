@@ -3,7 +3,7 @@
 <!-- NGS Theme Styles -->
 <link rel="stylesheet" type="text/css" href="{$SITE_PATH}/css/admin/style.css?{$VERSION}" />
 <link rel="stylesheet" type="text/css" href="{$SITE_PATH}/css/admin/skin.css?{$VERSION}" />
-<link rel="stylesheet" type="text/css" href="{$SITE_PATH}/js/lib/jquery/jquery-ui-1.11.2.custom/jquery-ui.min.css?{$VERSION}" />
+<link rel="stylesheet" type="text/css" href="{$SITE_PATH}/js/lib/jquery/jquery-ui/jquery-ui.min.css?{$VERSION}" />
 <link rel="shortcut icon" type="image/png" href="{$SITE_PATH}/img/favicon.png" />
 <script type="text/javascript">
     {literal}
@@ -17,7 +17,7 @@
 <script type="text/javascript"  src="{$SITE_PATH}/js/lib/prototype.js" ></script>
 <script type="text/javascript"  src="{$SITE_PATH}/js/lib/jquery/jquery-1.11.2.min.js" ></script>
 <script type="text/javascript"  src="{$SITE_PATH}/js/lib/jquery/jquery.ui.touch-punch.js" ></script>
-<script type="text/javascript"  src="{$SITE_PATH}/js/lib/jquery/jquery-ui-1.11.2.custom/jquery-ui-min.js"></script>
+<script type="text/javascript"  src="{$SITE_PATH}/js/lib/jquery/jquery-ui/jquery-ui.min.js"></script>
 <script type="text/javascript" src="{$SITE_PATH}/js/lib/tinymce/tinymce.min.js"></script>
 <script type="text/javascript">
     jQuery.noConflict();

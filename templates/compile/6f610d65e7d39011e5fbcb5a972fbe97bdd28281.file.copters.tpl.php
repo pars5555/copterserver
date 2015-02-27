@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.11, created on 2015-01-18 21:41:37
+<?php /* Smarty version Smarty-3.1.11, created on 2015-02-26 21:22:03
          compiled from "D:\xampp\htdocs\copterserver\templates\admin\copters.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:1976554bbf051e049c1-57784268%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '6f610d65e7d39011e5fbcb5a972fbe97bdd28281' => 
     array (
       0 => 'D:\\xampp\\htdocs\\copterserver\\templates\\admin\\copters.tpl',
-      1 => 1421602894,
+      1 => 1421603304,
       2 => 'file',
     ),
   ),
@@ -15,6 +15,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
+  'version' => 'Smarty-3.1.11',
+  'unifunc' => 'content_54bbf051ea0dc8_75034134',
   'variables' => 
   array (
     'ns' => 0,
@@ -23,8 +25,6 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'copter' => 0,
   ),
   'has_nocache_code' => false,
-  'version' => 'Smarty-3.1.11',
-  'unifunc' => 'content_54bbf051ea0dc8_75034134',
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_54bbf051ea0dc8_75034134')) {function content_54bbf051ea0dc8_75034134($_smarty_tpl) {?><h2 class="main_title">Active Copters</h2>
 <div class="main_content">

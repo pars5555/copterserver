@@ -14,7 +14,7 @@
             <h2 class="main_title">{$ns.copter->getName()}</h2>
         </div> 
         <div class="copter_status_box">
- <a class="button grey" id="copter_reboot" >Reboot Copter</a>
+            <a class="button grey" id="copter_reboot" >Reboot Copter</a>
 
             <div class="copter_status" id="copterStatus">
                 <span id="copterStatusText">Connecting...</span>
@@ -74,6 +74,18 @@
         <div class="copter_engine">
             <h2 class="main_title">Control</h2>
             <button class="button grey" id="startEngine">StartEngine</button>
+            <div class="engine_controls">
+                <div class="ec_block">
+                    <div class="x_line"></div>
+                    <div class="y_line"></div>
+                    <div class="ec_btn f_ec_btn"></div>
+                </div>
+                <div class="ec_block">
+                    <div class="x_line"></div>
+                    <div class="y_line"></div>                    
+                    <div class="ec_btn f_ec_btn"></div>
+                </div>
+            </div>
         </div>
 
         <div class="copter_map">

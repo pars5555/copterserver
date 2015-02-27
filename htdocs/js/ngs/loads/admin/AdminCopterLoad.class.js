@@ -16,13 +16,14 @@ ngs.AdminCopterLoad = Class.create(ngs.AbstractLoad, {
         return "admin_copter";
     },
     afterLoad: function () {
-        this.initSocketConnection();
+        //this.initSocketConnection();
         this.initCameraStartStop();
-        this.initGoogleMap();
+       // this.initGoogleMap();
         this.connectionLogToggle();
         this.initGpioFunctionality();
         this.initMpuFunctionality();
 	this.initRebootButton();
+	this.engineControlButton();
     },
     initRebootButton:function(){
         var self = this;
@@ -261,5 +262,37 @@ ngs.AdminCopterLoad = Class.create(ngs.AbstractLoad, {
             };
             self.sendJsonMessage(param);
         });
+    },
+    engineControlButton : function(){
+        jQuery(".f_ec_btn").click(function(){
+              var position = jQuery(this).position();
+          var circleWidth = jQuery(this).width();
+          var circleHeight = jQuery(this).width();
+          var y = -parseInt(position.top+circleHeight/2)+100;
+          var x =  parseInt(position.left+circleWidth/2)-100;
+          var distance = Math.sqrt(x*x+y*y);
+          var angle = Math.atan(x/y)*180;
+          console.log(x,y);
+        });
+        
+        jQuery(".f_ec_btn").draggable({
+            containment: "parent",
+      start: function(e) {
+      },
+      drag: function(e) {
+             var position = jQuery(this).position();
+          var circleWidth = jQuery(this).width();
+          var circleHeight = jQuery(this).width();
+          var y = -parseInt(position.top+circleHeight/2)+100;
+          var x =  parseInt(position.left+circleWidth/2)-100;
+          var distance = Math.sqrt(x*x+y*y);
+          var angle = Math.atan(y/x)*180/Math.PI;
+         
+           // jQuery(this.dragobject).y 
+          console.log( jQuery(this.dragobject).x );
+      },
+      stop: function(e) {
+      }
+    });
     }
 });

@@ -1,17 +1,17 @@
-<?php /* Smarty version Smarty-3.1.11, created on 2015-01-24 17:20:51
+<?php /* Smarty version Smarty-3.1.11, created on 2015-02-26 21:38:51
          compiled from "D:\xampp\htdocs\copterserver\templates\admin\copter.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:2397854c39c33b17bc1-30148416%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:3187354ef5a2be33709-92750797%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     'ac3d6cfc249af47c1892011decbe8fb4614d6155' => 
     array (
       0 => 'D:\\xampp\\htdocs\\copterserver\\templates\\admin\\copter.tpl',
-      1 => 1422104963,
+      1 => 1424972263,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '2397854c39c33b17bc1-30148416',
+  'nocache_hash' => '3187354ef5a2be33709-92750797',
   'function' => 
   array (
   ),
@@ -25,10 +25,15 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1.11',
-  'unifunc' => 'content_54c39c33c021f5_98624511',
+  'unifunc' => 'content_54ef5a2bf067a1_54543821',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_54c39c33c021f5_98624511')) {function content_54c39c33c021f5_98624511($_smarty_tpl) {?><?php if (!is_callable('smarty_function_html_options')) include 'D:/xampp/htdocs/copterserver/classes/lib/smarty/plugins\\function.html_options.php';
+<?php if ($_valid && !is_callable('content_54ef5a2bf067a1_54543821')) {function content_54ef5a2bf067a1_54543821($_smarty_tpl) {?><?php if (!is_callable('smarty_function_html_options')) include 'D:/xampp/htdocs/copterserver/classes/lib/smarty/plugins\\function.html_options.php';
 ?><div class="main_content">
+
+    <div class="connection_error_message" id="connection_error_message">
+        <span>No connection</span>
+    </div>
+
     <input type="hidden" id="copter_ip" value="<?php echo $_smarty_tpl->tpl_vars['ns']->value['copter']->getIp();?>
 " />
     <input type="hidden" id="copter_id" value="<?php echo $_smarty_tpl->tpl_vars['ns']->value['copter']->getId();?>
@@ -45,6 +50,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 </h2>
         </div> 
         <div class="copter_status_box">
+            <a class="button grey" id="copter_reboot" >Reboot Copter</a>
+
             <div class="copter_status" id="copterStatus">
                 <span id="copterStatusText">Connecting...</span>
                 <a class="page_reload hide" id="page_reload" href="<?php echo $_smarty_tpl->tpl_vars['SITE_PATH']->value;?>
@@ -99,35 +106,61 @@ $_smarty_tpl->tpl_vars['width_height_array']->_loop = true;
                     <button class="button grey" id="startCameraStreamingBtn">Start Camera Streaming</button>
                 </div>
                 <div class="form-group">
+                    <button class="button grey" id="startCameraStreamingRtmpBtn">Start Camera Streaming (RTMP)</button>
+                </div>
+                <div class="form-group">
                     <button class="button grey" id="stopCameraStreamingBtn">Stop Camera Streaming</button>
                 </div>
             </div>
 
-            <div id="copterCameraContainer"></div>
-
-
-
-            <div id="video-jwplayer_wrapper" style="position: relative; display: block; width: 160px; height: 120px;">
-                <object type="application/x-shockwave-flash" data="/jwplayer/jwplayer.flash.swf" width="100%" height="100%" bgcolor="#000000" id="video-jwplayer" name="video-jwplayer" tabindex="0">
-                    <param name="allowfullscreen" value="true">
-                    <param name="allowscriptaccess" value="always">
-                    <param name="seamlesstabbing" value="true">
-                    <param name="wmode" value="opaque">
-                </object>
-                <div id="video-jwplayer_aspect" style="display: none;"></div>
-                <div id="video-jwplayer_jwpsrv" style="position: absolute; top: 0px; z-index: 10;"></div>
-            </div>
+            <div id="copterVlcContainer"></div>
+            <div id="copterJwPlayerContainer"></div>
 
         </div>
 
         <div class="copter_engine">
             <h2 class="main_title">Control</h2>
             <button class="button grey" id="startEngine">StartEngine</button>
+            <div class="engine_controls">
+                <div class="ec_block">
+                    <div class="x_line"></div>
+                    <div class="y_line"></div>
+                    <div class="ec_btn f_ec_btn"></div>
+                </div>
+                <div class="ec_block">
+                    <div class="x_line"></div>
+                    <div class="y_line"></div>                    
+                    <div class="ec_btn f_ec_btn"></div>
+                </div>
+            </div>
         </div>
 
         <div class="copter_map">
             <h2 class="main_title">Map</h2>
             <div class="map_canvas" id="map-canvas"></div>
+            <h2 class="main_title">MPU 9150</h2>
+            <div class="mpu_control">
+                <div>
+                    <span class="mpu_label">Accelerometer:</span>
+                    <a href="javascript:void(0)" id="accel_on" class="button grey ">On</a>
+                    <a href="javascript:void(0)" id="accel_off" class="button grey">Off</a>
+                </div>
+                <div class="accelerometer_state">
+                    <div class="cube">
+                        <div class="side  front"></div>
+                        <div class="side   back"></div>
+                        <div class="side  right"></div>
+                        <div class="side   left"></div>
+                        <div class="side    top"></div>
+                        <div class="side bottom"></div>
+                    </div>
+                </div>
+                <div>
+                    <span class="mpu_label">Gyroscope:</span>
+                    <a href="javascript:void(0)" id="gyro_on" class="button grey ">On</a>
+                    <a href="javascript:void(0)" id="gyro_off" class="button grey">Off</a>
+                </div>
+            </div>
             <h2 class="main_title">GPIO Control</h2>
             <div class="gpio_control">
                 <form autocomplete="off">
@@ -137,7 +170,7 @@ $_smarty_tpl->tpl_vars['width_height_array']->_loop = true;
                             <div class="select_wrapper">
                                 <select id="pin_num">
                                     <option value="0">0</option>
-                                    <option value="1">1</option>
+                                    <option value="1" selected>1</option>
                                     <option value="2">2</option>
                                     <option value="3">3</option>
                                     <option value="4">4</option>
@@ -161,25 +194,15 @@ $_smarty_tpl->tpl_vars['width_height_array']->_loop = true;
                         </div>
                         <a href="javascript:void(0)" id="pin_on" class="button grey ">On</a>
                         <a href="javascript:void(0)" id="pin_off" class="button grey">Off</a>
+                        <a href="javascript:void(0)" id="pin_on_if_hold_btn" class="button grey">On if hold</a>
                     </div>
                     <div class="table gpio_ctrl_table">
                         <div class="table-cell">
                             <div class="form-group">
                                 <label class="input_label">Duration</label>
-                                <input id="duration" class="text" type="number" min="0" value="0">
+                                <input id="duration" class="text" type="number" min="0" value="500">
                             </div>
-                        </div>
-                        <div class="table-cell">
-                            <div class="form-group">
-                                <label class="input_label">State</label>
-                                <div class="select_wrapper">
-                                    <select id="state">
-                                        <option value="0">off</option>
-                                        <option value="1">on</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
+                        </div>                        
                         <div class="table-cell">
                             <a href="javascript:void(0)" id="send_puls_btn" class="button grey">Puls</a>
                         </div>
