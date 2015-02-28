@@ -309,6 +309,7 @@ ngs.AdminCopterLoad = Class.create(ngs.AbstractLoad, {
         });
     },
     initEngineStartStopButtons: function () {
+        var self = this;
         jQuery('#startEngine').click(function(){
             var param = {
                 command: ngs.Constants.ENGINE_COMMAND,
