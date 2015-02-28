@@ -24,6 +24,7 @@ ngs.AdminCopterLoad = Class.create(ngs.AbstractLoad, {
         this.initMpuFunctionality();
         this.initRebootButton();
         this.engineControlButton();
+        this.initEngineStartStopButtons();
     },
     initRebootButton: function () {
         var self = this;
@@ -270,20 +271,20 @@ ngs.AdminCopterLoad = Class.create(ngs.AbstractLoad, {
         copter2DControl1.addXListener(function (x) {
             var param = {
                 command: ngs.Constants.ENGINE_COMMAND,
-                action: ngs.Constants.SET_YAW,
+                action: ngs.Constants.SET_YAW_ACTION,
                 value: x
             };
             self.sendJsonMessage(param);
-            jQuery('#throttle_yaw_values').html("Yaw: "+copter2DControl1.getX() + "; Throttle: " + copter2DControl1.getY());
+            jQuery('#throttle_yaw_values').html("Yaw: " + copter2DControl1.getX() + "; Throttle: " + copter2DControl1.getY());
         });
         copter2DControl1.addYListener(function (y) {
             var param = {
                 command: ngs.Constants.ENGINE_COMMAND,
-                action: ngs.Constants.SET_THROTTLE,
+                action: ngs.Constants.SET_THROTTLE_ACTION,
                 value: y
             };
             self.sendJsonMessage(param);
-            jQuery('#throttle_yaw_values').html("Yaw: "+ copter2DControl1.getX() + "; Throttle: " + copter2DControl1.getY());
+            jQuery('#throttle_yaw_values').html("Yaw: " + copter2DControl1.getX() + "; Throttle: " + copter2DControl1.getY());
         });
 
         var copter2DControl2 = new Copter2DControl();
@@ -291,7 +292,7 @@ ngs.AdminCopterLoad = Class.create(ngs.AbstractLoad, {
         copter2DControl2.addXListener(function (x) {
             var param = {
                 command: ngs.Constants.ENGINE_COMMAND,
-                action: ngs.Constants.SET_ROLL,
+                action: ngs.Constants.SET_ROLL_ACTION,
                 value: x
             };
             self.sendJsonMessage(param);
@@ -300,11 +301,20 @@ ngs.AdminCopterLoad = Class.create(ngs.AbstractLoad, {
         copter2DControl2.addYListener(function (y) {
             var param = {
                 command: ngs.Constants.ENGINE_COMMAND,
-                action: ngs.Constants.SET_PITCH,
+                action: ngs.Constants.SET_PITCH_ACTION,
                 value: y
             };
             self.sendJsonMessage(param);
             jQuery('#pitch_roll_values').html("Roll: " + copter2DControl2.getX() + "; Pitch: " + copter2DControl2.getY());
+        });
+    },
+    initEngineStartStopButtons: function () {
+        jQuery('#startEngine').click(function(){
+            var param = {
+                command: ngs.Constants.ENGINE_COMMAND,
+                action: ngs.Constants.START_ENGINE_ACTION
+            };
+            self.sendJsonMessage(param);
         });
     }
 

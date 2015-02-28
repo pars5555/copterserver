@@ -14,9 +14,10 @@ ngs.Constants = {
     SET_GYRO_ON_ACTION: "set_gyro_on",
     SET_GYRO_OFF_ACTION: "set_gyro_off",
     ENGINE_COMMAND: "engine",
-    SET_THROTTLE: "set_throttle",
-    SET_YAW: "set_yaw",
-    SET_ROLL: "set_roll",
-    SET_PITCH: "set_pitch",
+    START_ENGINE_ACTION: "start_engine",
+    SET_THROTTLE_ACTION: "set_throttle",
+    SET_YAW_ACTION: "set_yaw",
+    SET_ROLL_ACTION: "set_roll",
+    SET_PITCH_ACTION: "set_pitch",
     CAMERA_STOP_STREAMING_COMMAND: "stop_streaming"
 };

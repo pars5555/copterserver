@@ -34,6 +34,7 @@ var Copter2DControl = Class.create({
             var mouseX = Math.floor(e.clientX - offset.left - borderWidth);
             var mouseY = Math.floor(e.clientY - offset.top - borderWidth);
             self.draggableCircle.css({'left': mouseX - self.draggableCircleR, 'top': mouseY - self.draggableCircleR});
+            self.limitDraggableObjectInParentCircle();
             self.draggableCircle.trigger(e);
         });
         self.draggableCircle.mousedown(function (e) {
@@ -45,29 +46,7 @@ var Copter2DControl = Class.create({
             start: function () {
             },
             drag: function () {
-                var position = self.draggableCircle.position();
-                var y = -parseInt(position.top + self.draggableCircleR) + self.containerR;
-                var x = parseInt(position.left + self.draggableCircleR) - self.containerR;
-                var angle = self.getAngleByXY(x, y);
-                var radian = angle * Math.PI / 180;
-                var distance = Math.sqrt(x * x + y * y);
-                var finalX = x;
-                var finalY = y;
-                if (distance > self.containerR) {
-                    var xx = self.containerR * Math.cos(radian);
-                    var yy = self.containerR * Math.sin(radian);
-                    var leftTop = self.translateXYToLeftTop(xx, yy, self.containerR);
-                    self.draggableHelperCircle.css({'left': leftTop[0] - self.draggableCircleR, 'top': leftTop[1] - self.draggableCircleR, 'display': 'block'});
-                    self.draggableCircle.css({'visibility': 'hidden'});
-                    finalX = xx;
-                    finalY = yy;
-                } else
-                {
-                    self.draggableCircle.css({'visibility': 'visible'});
-                    self.draggableCircle.parent().find('.f_ec_btn_real').css({'display': 'none'});
-                }
-                self.lastX = Math.round(finalX * 100 / self.containerR);
-                self.lastY = Math.round(finalY * 100 / self.containerR);
+                self.limitDraggableObjectInParentCircle();
             },
             stop: function () {
                 /* var position = jQuery(this).position();
@@ -91,14 +70,54 @@ var Copter2DControl = Class.create({
             }
         });
     },
+    limitDraggableObjectInParentCircle: function () {
+        var position = this.draggableCircle.position();
+        var xy = this.translateLeftTopToXY(position.left, position.top);
+        var x = xy[0];
+        var y = xy[1];
+        var angle = this.getAngleByXY(x, y);
+        var radian = angle * Math.PI / 180;
+        var distance = Math.sqrt(x * x + y * y);
+        var finalX = x;
+        var finalY = y;
+        if (distance > this.containerR) {
+            var xx = this.containerR * Math.cos(radian);
+            var yy = this.containerR * Math.sin(radian);
+            var leftTop = this.translateXYToLeftTop(xx, yy, this.containerR);
+            this.draggableHelperCircle.css({'left': leftTop[0] - this.draggableCircleR, 'top': leftTop[1] - this.draggableCircleR, 'display': 'block'});
+            this.draggableCircle.css({'visibility': 'hidden'});
+            finalX = xx;
+            finalY = yy;
+        } else
+        {
+            this.draggableCircle.css({'visibility': 'visible'});
+            this.draggableCircle.parent().find('.f_ec_btn_real').css({'display': 'none'});
+        }
+        this.lastX = Math.round(finalX * 100 / this.containerR);
+        this.lastY = Math.round(finalY * 100 / this.containerR);
+    },
     resetDraggableCircle: function () {
         var leftTop = this.translateXYToLeftTop(0, 0);
-        this.draggableCircle.css({'visibility': 'visible', 'left': leftTop[0] - this.draggableCircleR, 'top': leftTop[1] - this.draggableCircleR});
-        this.draggableHelperCircle.css({'display': 'none'});
+        var self = this;
+        var resetCss = {'left': leftTop[0] - this.draggableCircleR, 'top': leftTop[1] - this.draggableCircleR};
+        this.draggableCircle.animate(resetCss, 200, 'swing', function () {
+            self.draggableCircle.css({'visibility': 'visible'});
+        });
+        this.draggableHelperCircle.animate(resetCss, 200, 'swing', function () {
+            self.draggableHelperCircle.css({'display': 'none'});
+        });
+        this.lastX = 0;
+        this.lastY = 0;
     },
     translateXYToLeftTop: function (x, y)
     {
         return [x + this.containerR, -y + this.containerR];
+    },
+    translateLeftTopToXY: function (left, top)
+    {
+        var l = parseInt(left + this.draggableCircleR) - this.containerR;
+        var t = -parseInt(top + this.draggableCircleR) + this.containerR;
+        return [l, t];
     },
     getAngleByXY: function (x, y)
     {
