@@ -87,8 +87,8 @@ ngs.AdminCopterLoad = Class.create(ngs.AbstractLoad, {
         {
             showInMessageBar = true;
         }
-        if (this.connected == true) {
-            if (showInMessageBar == true) {
+        if (this.connected === true) {
+            if (showInMessageBar === true) {
                 jQuery('#conectionLog').append("<p class='my_message'>" + JSON.stringify(object) + "</p>");
                 jQuery("#conectionLog").scrollTop(1E10);
             }
