@@ -16,9 +16,9 @@ ngs.AdminCopterLoad = Class.create(ngs.AbstractLoad, {
         return "admin_copter";
     },
     afterLoad: function () {
-        //this.initSocketConnection();
+        this.initSocketConnection();
         this.initCameraStartStop();
-        // this.initGoogleMap();
+        this.initGoogleMap();
         this.connectionLogToggle();
         this.initGpioFunctionality();
         this.initMpuFunctionality();
@@ -264,23 +264,47 @@ ngs.AdminCopterLoad = Class.create(ngs.AbstractLoad, {
         });
     },
     engineControlButton: function () {
+        var self = this;
         var copter2DControl1 = new Copter2DControl();
-        copter2DControl1.init("throttle_yaw_container");
+        copter2DControl1.init("throttle_yaw_container", 100);
         copter2DControl1.addXListener(function (x) {
+            var param = {
+                command: ngs.Constants.ENGINE_COMMAND,
+                action: ngs.Constants.SET_YAW,
+                value: x
+            };
+            self.sendJsonMessage(param);
             jQuery('#throttle_yaw_values').html("Yaw: "+copter2DControl1.getX() + "; Throttle: " + copter2DControl1.getY());
         });
         copter2DControl1.addYListener(function (y) {
-
+            var param = {
+                command: ngs.Constants.ENGINE_COMMAND,
+                action: ngs.Constants.SET_THROTTLE,
+                value: y
+            };
+            self.sendJsonMessage(param);
             jQuery('#throttle_yaw_values').html("Yaw: "+ copter2DControl1.getX() + "; Throttle: " + copter2DControl1.getY());
         });
 
         var copter2DControl2 = new Copter2DControl();
-        copter2DControl2.init("pitch_roll_container");
+        copter2DControl2.init("pitch_roll_container", 100);
         copter2DControl2.addXListener(function (x) {
-            jQuery('#pitch_roll_values').html("Roll: "+copter2DControl2.getX() + "; Pitch: " + copter2DControl2.getY());
+            var param = {
+                command: ngs.Constants.ENGINE_COMMAND,
+                action: ngs.Constants.SET_ROLL,
+                value: x
+            };
+            self.sendJsonMessage(param);
+            jQuery('#pitch_roll_values').html("Roll: " + copter2DControl2.getX() + "; Pitch: " + copter2DControl2.getY());
         });
         copter2DControl2.addYListener(function (y) {
-            jQuery('#pitch_roll_values').html("Roll: "+copter2DControl2.getX() + "; Pitch: " + copter2DControl2.getY());
+            var param = {
+                command: ngs.Constants.ENGINE_COMMAND,
+                action: ngs.Constants.SET_PITCH,
+                value: y
+            };
+            self.sendJsonMessage(param);
+            jQuery('#pitch_roll_values').html("Roll: " + copter2DControl2.getX() + "; Pitch: " + copter2DControl2.getY());
         });
     }
 

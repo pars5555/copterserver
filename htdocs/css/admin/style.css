@@ -444,18 +444,24 @@ header{
     position: absolute;
     top:50%;
     left:0;
-    width:100%;
+    width:120%;
     height:1px;
     background-color:red;
+    text-align: right;
+    z-index: -1;
+    pointer-events: none;
 }
 
 .ec_block .y_line{
     position: absolute;
-    top:0;
+    top:-20%;
     left:50%;
-    height:100%;
+    height:120%;
     width:1px;
     background-color:red;
+    text-indent: 5px;
+    z-index: -1;
+    pointer-events: none;
 }
 .ec_block .ec_btn{
     position:absolute;
