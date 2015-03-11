@@ -72,31 +72,64 @@
         </div>
 
         <div class="copter_engine">
-            <h2 class="main_title">Control</h2>
-            <div class="engine_controls">
-                <div class="ec_block" id="throttle_yaw_container" >
-                    <div class="x_line">Yaw</div>
-                    <div class="y_line">Throttle</div>
-                    <div class="ec_btn f_ec_btn_real" style="display:none"></div>
-                    <div class="ec_btn f_ec_btn"></div>
+            <div class="copter_controls_container">
+                <h2 class="main_title">Control</h2>
+                <div class="engine_controls">
+                    <div class="ec_block" id="throttle_yaw_container" >
+                        <div class="x_line">Yaw</div>
+                        <div class="y_line">Throttle</div>
+                        <div class="ec_btn f_ec_btn_real" style="display:none"></div>
+                        <div class="ec_btn f_ec_btn"></div>
+                    </div>
+                    <div class="ec_block"  id="pitch_roll_container">
+                        <div class="x_line">Roll</div>
+                        <div class="y_line">Pitch</div>                    
+                        <div class="ec_btn f_ec_btn_real" style="display: none"></div>
+                        <div class="ec_btn f_ec_btn" ></div>
+                    </div>
+                    <div >
+                        <div id="throttle_yaw_values"></div>
+                        <div id="pitch_roll_values"></div>                    
+                    </div>
                 </div>
-                <div class="ec_block"  id="pitch_roll_container">
-                    <div class="x_line">Roll</div>
-                    <div class="y_line">Pitch</div>                    
-                    <div class="ec_btn f_ec_btn_real" style="display: none"></div>
-                    <div class="ec_btn f_ec_btn" ></div>
-                </div>
-                <div >
-                    <div id="throttle_yaw_values"></div>
-                    <div id="pitch_roll_values"></div>                    
-                </div>
+                <button class="button grey" id="startEngine">StartEngine</button>
             </div>
-            <button class="button grey" id="startEngine">StartEngine</button>
+            <div class="distance_meter_container">
+                <div id="left_distance_meter_value" style="border-radius: 100% 100% 0 0;border: 2px solid black;width: 100px; height:100px;text-align: center;transform: rotate(-45deg);float:left; margin-top:50px"></div>
+                <div id="front_distance_meter_value" style="border-radius: 100% 100% 0 0;border: 2px solid black;width: 100px; height:100px;text-align: center;float:left;margin-left: 50px"></div>
+                <div id="right_distance_meter_value" style="border-radius: 100% 100% 0 0;border: 2px solid black;width: 100px; height:100px;text-align: center;transform: rotate(45deg);float:left;margin-left: 50px; margin-top:50px"></div>
+                <div style="clear:both"></div>
+                <button class="button grey" id="startDistanceStreaming">Start Distance Streaming</button>
+
+                <div class="onoffswitch" style="float:left">
+                    <input type="checkbox" class="onoffswitch-checkbox" id="distance_meters_on_off">
+                    <label class="onoffswitch-label" for="distance_meters_on_off">
+                        <div class="onoffswitch-inner"></div>
+                        <span class="onoffswitch-switch"></span>
+                    </label>
+                </div>
+
+            </div>
         </div>
 
         <div class="copter_map">
             <h2 class="main_title">Map</h2>
+            <div  >
+                <div class="onoffswitch" style="float:left">
+                    <input type="checkbox" class="onoffswitch-checkbox" id="gps_on_off" checked="">
+                    <label class="onoffswitch-label" for="gps_on_off">
+                        <div class="onoffswitch-inner"></div>
+                        <span class="onoffswitch-switch"></span>
+                    </label>
+                </div>
+                <div id="gps_error_message" style="float:right; color:red"></div>
+            </div>
+            <div style="clear:both"></div>
             <div class="map_canvas" id="map-canvas"></div>
+            <div style="clear:both"></div>
+            <div id="copter_home_list_container" style="clear:both">                
+                {nest ns=copter_home_list}
+            </div>
             <h2 class="main_title">MPU 9150</h2>
             <div class="mpu_control">
                 <div>

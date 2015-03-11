@@ -19,5 +19,11 @@ ngs.Constants = {
     SET_YAW_ACTION: "set_yaw",
     SET_ROLL_ACTION: "set_roll",
     SET_PITCH_ACTION: "set_pitch",
-    CAMERA_STOP_STREAMING_COMMAND: "stop_streaming"
+    CAMERA_STOP_STREAMING_COMMAND: "stop_streaming",
+    GPS_COMMAND: "gps",
+    START_STREAM_GPS_DATA: "start_gps_streaming",
+    STOP_STREAM_GPS_DATA: "stop_gps_streaming",
+    HCSR04_COMMAND: "hcsr04",
+    START_STREAM_DISTANCE_DATA: "start_distance_streaming",
+    STOP_STREAM_DISTANCE_DATA: "stop_distance_streaming"
 };

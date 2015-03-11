@@ -68,6 +68,7 @@
                 <file>ngs/loads/admin/AdminCoptersLoad.class.js</file>
                 <file>ngs/loads/admin/AdminVlcPlayerLoad.class.js</file>
                 <file>ngs/loads/admin/AdminJwPlayerLoad.class.js</file>
+                <file>ngs/loads/admin/AdminCopterHomeListLoad.class.js</file>
             </files>
         </input>
     </builder>

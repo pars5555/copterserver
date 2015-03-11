@@ -4,8 +4,6 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/D:/xampp/htdocs/copterserver/templates/admin/copter.tpl</file>
-            <file>file:/D:/xampp/htdocs/copterserver/htdocs/js/ngs/util/Copter2DControl.class.js</file>
-            <file>file:/D:/xampp/htdocs/copterserver/htdocs/css/admin/style.css</file>
             <file>file:/D:/xampp/htdocs/copterserver/htdocs/js/ngs/loads/admin/AdminCopterLoad.class.js</file>
         </group>
     </open-files>

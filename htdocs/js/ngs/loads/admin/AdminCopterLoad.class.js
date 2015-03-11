@@ -16,15 +16,78 @@ ngs.AdminCopterLoad = Class.create(ngs.AbstractLoad, {
         return "admin_copter";
     },
     afterLoad: function () {
+        ngs.nestLoad('admin_copter_home_list', {});
         this.initSocketConnection();
         this.initCameraStartStop();
         this.initGoogleMap();
+        this.initCopterHomes();
+        this.initGpsOnOff();
         this.connectionLogToggle();
         this.initGpioFunctionality();
         this.initMpuFunctionality();
         this.initRebootButton();
         this.engineControlButton();
         this.initEngineStartStopButtons();
+        this.initDistanceMeters();
+    },
+    initDistanceMeters: function () {
+        var self = this;
+        jQuery('#distance_meters_on_off').change(function () {
+            var status = jQuery(this).is(':checked');
+            var param = {
+                command: ngs.Constants.HCSR04_COMMAND,
+                action: status ? ngs.Constants.START_STREAM_DISTANCE_DATA : ngs.Constants.STOP_STREAM_DISTANCE_DATA
+            };
+            self.sendJsonMessage(param);
+        });
+
+    },
+    setFrontDistanceValue: function (distance) {
+        distance = parseInt(distance * 100) / 100;
+        jQuery('#front_distance_meter_value').html(distance > 0 ? (distance + " cm") : "");
+    },
+    initCopterHomes: function () {
+        var copterHomesJson = jQuery('#copterHomesJson').val();
+        var copterHomesArray = jQuery.parseJSON(copterHomesJson);
+        var image = {
+            url: '/img/gmap_flag.png',
+            // This marker is 20 pixels wide by 32 pixels tall.
+            size: new google.maps.Size(20, 32),
+            // The origin for this image is 0,0.
+            origin: new google.maps.Point(0, 0),
+            // The anchor for this image is the base of the flagpole at 0,32.
+            anchor: new google.maps.Point(0, 32)
+        };
+        for (var i = 0; i < copterHomesArray.length; i++)
+        {
+            var copterHome = copterHomesArray[i];
+            var homeMarker = new google.maps.Marker({position: {'lat': parseFloat(copterHome.lat), 'lng': parseFloat(copterHome.lng)}, map: this.googleMap, icon: image});
+            this.googleMapMarker.setTitle(homeMarker.title);
+        }
+    },
+    initGpsOnOff: function () {
+        var self = this;
+        jQuery('#gps_on_off').change(function () {
+            var status = jQuery(this).is(':checked');
+            var param = {
+                command: ngs.Constants.GPS_COMMAND,
+                action: (status ? ngs.Constants.START_STREAM_GPS_DATA : ngs.Constants.STOP_STREAM_GPS_DATA)
+            };
+            self.sendJsonMessage(param);
+            if (!status) {
+                self.showHideGoogleMapMarker(false);
+            }
+        });
+    },
+    showHideGoogleMapMarker: function (show) {
+        if (show) {
+            if (this.googleMapMarker.getMap() == null) {
+                this.googleMapMarker.setMap(this.googleMap);
+            }
+        } else
+        {
+            this.googleMapMarker.setMap(null);
+        }
     },
     initRebootButton: function () {
         var self = this;
@@ -36,12 +99,36 @@ ngs.AdminCopterLoad = Class.create(ngs.AbstractLoad, {
         });
     },
     initGoogleMap: function () {
+        var mapCenterLng = 44.516495;
+        var mapCenterLat = 40.206875;
         var mapOptions = {
-            center: {lat: -34.397, lng: 150.644},
-            zoom: 8
+            center: {lat: mapCenterLat, lng: mapCenterLng},
+            zoom: 16
         };
-        var map = new google.maps.Map(document.getElementById('map-canvas'),
-                mapOptions);
+        this.googleMap = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
+
+        this.googleMapMarker = new google.maps.Marker({position: {lat: mapCenterLat, lng: mapCenterLng}, map: this.googleMap});
+        this.googleMapMarker.setTitle("Lat: " + mapCenterLat + "\r\n" + "Lng: " + mapCenterLng);
+
+        google.maps.event.addListener(this.googleMap, 'click', function (event) {
+            var mLat = event.latLng.lat();
+            var mLng = event.latLng.lng();
+
+        });
+
+    },
+    setMarkerOnGoogleMap: function (lng, lat)
+    {
+        if (lng == null || lat == null || !(lng > 0) || !(lat > 0))
+        {
+            jQuery('#gps_error_message').html("No GPS data! Waiting to sattelite...");
+            return;
+        }
+        var latlng = new google.maps.LatLng(lat, lng);
+        this.googleMapMarker.setPosition(latlng);
+        this.googleMapMarker.setTitle("Lat: " + lat + "\r\n" + "Lng: " + lng);
+        this.googleMap.setCenter(latlng);
     },
     getCameraSettings: function () {
         var ret = new Array();
@@ -129,23 +216,34 @@ ngs.AdminCopterLoad = Class.create(ngs.AbstractLoad, {
         var copter_img = jQuery("#copter_image").attr("style");
         var copter_ip = jQuery('#copter_ip').val();
         this.socket = new WebSocket("ws://" + copter_ip + ":6789/");
-        var thisInstance = this;
+        var self = this;
         this.socket.onopen = function () {
             jQuery('#copterStatusText').html('conected');
             jQuery('#copterStatus').addClass("connected").removeClass("error");
-            thisInstance.sendPingPongCommand();
-            thisInstance.connected = true;
+            self.sendPingPongCommand();
+            self.connected = true;
         };
         this.socket.onmessage = function (message) {
             var jsonResponse = jQuery.parseJSON(message.data);
             if (typeof jsonResponse.ping_id !== "undefined")
             {
-                thisInstance.response_ping_id = jsonResponse.ping_id;
+                self.response_ping_id = jsonResponse.ping_id;
                 return false;
             }
             if (typeof jsonResponse.accelX !== "undefined" || typeof jsonResponse.gyroX !== "undefined")
             {
                 jQuery('.accelerometer_state .cube').css({'transform': 'rotateX(' + jsonResponse.accelX + 'deg) rotateZ(' + (-jsonResponse.accelY) + 'deg)'});
+                return false;
+            }
+            if (typeof jsonResponse.lng !== "undefined" && typeof jsonResponse.lat !== "undefined")
+            {
+                self.setMarkerOnGoogleMap(jsonResponse.lng, jsonResponse.lat);
+                self.showHideGoogleMapMarker(true);
+                return false;
+            }
+            if (typeof jsonResponse.fron_distance_cm !== "undefined")
+            {
+                self.setFrontDistanceValue(jsonResponse.fron_distance_cm);
                 return false;
             }
             jQuery('#conectionLog').append("<div class='copter_log_img' style=" + copter_img + ">" + message.data + "</div>");
@@ -156,12 +254,12 @@ ngs.AdminCopterLoad = Class.create(ngs.AbstractLoad, {
             jQuery('#copterStatusText').html('closed');
             jQuery('#copterStatus').removeClass("connected").removeClass("error");
             jQuery("#page_reload").removeClass("hide");
-            thisInstance.connected = false;
+            self.connected = false;
         };
         this.socket.onerror = function () {
             jQuery('#copterStatusText').html('error');
             jQuery('#copterStatus').addClass("error").removeClass("connected");
-            thisInstance.connected = false;
+            self.connected = false;
         };
     },
     connectionLogToggle: function () {
@@ -310,7 +408,7 @@ ngs.AdminCopterLoad = Class.create(ngs.AbstractLoad, {
     },
     initEngineStartStopButtons: function () {
         var self = this;
-        jQuery('#startEngine').click(function(){
+        jQuery('#startEngine').click(function () {
             var param = {
                 command: ngs.Constants.ENGINE_COMMAND,
                 action: ngs.Constants.START_ENGINE_ACTION
