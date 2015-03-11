@@ -42,9 +42,17 @@ ngs.AdminCopterLoad = Class.create(ngs.AbstractLoad, {
         });
 
     },
-    setFrontDistanceValue: function (distance) {
-        distance = parseInt(distance * 100) / 100;
-        jQuery('#front_distance_meter_value').html(distance > 0 ? (distance + " cm") : "");
+    setDistanceValues: function (left, front, right, bottom, top) {
+        left = parseInt(left * 100) / 100;
+        front = parseInt(front * 100) / 100;
+        right = parseInt(right * 100) / 100;
+        bottom = parseInt(left * 100) / 100;
+        top = parseInt(top * 100) / 100;
+        jQuery('#left_distance_meter_value').html(left > 0 ? (left + " cm") : "");
+        jQuery('#front_distance_meter_value').html(front > 0 ? (front + " cm") : "");
+        jQuery('#right_distance_meter_value').html(right > 0 ? (right + " cm") : "");
+        jQuery('#bottom_distance_meter_value').html(bottom > 0 ? (bottom + " cm") : "");
+        jQuery('#top_distance_meter_value').html(top > 0 ? (top + " cm") : "");
     },
     initCopterHomes: function () {
         var copterHomesJson = jQuery('#copterHomesJson').val();
@@ -225,25 +233,31 @@ ngs.AdminCopterLoad = Class.create(ngs.AbstractLoad, {
         };
         this.socket.onmessage = function (message) {
             var jsonResponse = jQuery.parseJSON(message.data);
+            var data_info = jsonResponse[ngs.Constants.DATA_INFO_NAME];
+            if (typeof data_info !== "undefined")
+            {
+                data_info = "unknown";
+            }
             if (typeof jsonResponse.ping_id !== "undefined")
             {
                 self.response_ping_id = jsonResponse.ping_id;
                 return false;
             }
-            if (typeof jsonResponse.accelX !== "undefined" || typeof jsonResponse.gyroX !== "undefined")
+            if (data_info === ngs.Constants.DATA_INFO_MPU)
             {
                 jQuery('.accelerometer_state .cube').css({'transform': 'rotateX(' + jsonResponse.accelX + 'deg) rotateZ(' + (-jsonResponse.accelY) + 'deg)'});
                 return false;
-            }
-            if (typeof jsonResponse.lng !== "undefined" && typeof jsonResponse.lat !== "undefined")
+            } else
+            if (data_info === ngs.Constants.DATA_INFO_GPS)
             {
                 self.setMarkerOnGoogleMap(jsonResponse.lng, jsonResponse.lat);
                 self.showHideGoogleMapMarker(true);
                 return false;
-            }
-            if (typeof jsonResponse.fron_distance_cm !== "undefined")
+            } else
+
+            if (data_info === ngs.Constants.DATA_INFO_DISTANCE_METERS)
             {
-                self.setFrontDistanceValue(jsonResponse.fron_distance_cm);
+                self.setDistanceValues(jsonResponse.left, jsonResponse.front, jsonResponse.right, jsonResponse.bottom, jsonResponse.top);
                 return false;
             }
             jQuery('#conectionLog').append("<div class='copter_log_img' style=" + copter_img + ">" + message.data + "</div>");
