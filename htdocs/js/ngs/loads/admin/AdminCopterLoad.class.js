@@ -53,6 +53,7 @@ ngs.AdminCopterLoad = Class.create(ngs.AbstractLoad, {
         jQuery('#right_distance_meter_value').html(right > 0 ? (right + " cm") : "");
         jQuery('#bottom_distance_meter_value').html(bottom > 0 ? (bottom + " cm") : "");
         jQuery('#top_distance_meter_value').html(top > 0 ? (top + " cm") : "");
+        //distance_meters_on_off
     },
     initCopterHomes: function () {
         var copterHomesJson = jQuery('#copterHomesJson').val();
@@ -234,7 +235,7 @@ ngs.AdminCopterLoad = Class.create(ngs.AbstractLoad, {
         this.socket.onmessage = function (message) {
             var jsonResponse = jQuery.parseJSON(message.data);
             var data_info = jsonResponse[ngs.Constants.DATA_INFO_NAME];
-            if (typeof data_info !== "undefined")
+            if (typeof data_info === "undefined")
             {
                 data_info = "unknown";
             }
