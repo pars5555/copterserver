@@ -42,6 +42,10 @@ ngs.AdminCopterLoad = Class.create(ngs.AbstractLoad, {
         });
 
     },
+    setTemperaturAndHumidityValues: function (temperature, humidity) {
+        jQuery('#temperature_value').html(temperature);
+        jQuery('#humidity_value').html(humidity);
+    },
     setDistanceValues: function (left, front, right, bottom, top) {
         left = parseInt(left * 100) / 100;
         front = parseInt(front * 100) / 100;
@@ -259,6 +263,12 @@ ngs.AdminCopterLoad = Class.create(ngs.AbstractLoad, {
             if (data_info === ngs.Constants.DATA_INFO_DISTANCE_METERS)
             {
                 self.setDistanceValues(jsonResponse.left, jsonResponse.front, jsonResponse.right, jsonResponse.bottom, jsonResponse.top);
+                return false;
+            }
+
+            if (data_info === ngs.Constants.DATA_INFO_DHT)
+            {
+                self.setTemperaturAndHumidityValues(jsonResponse.temperature, jsonResponse.humidity);
                 return false;
             }
             jQuery('#conectionLog').append("<div class='copter_log_img' style=" + copter_img + ">" + message.data + "</div>");

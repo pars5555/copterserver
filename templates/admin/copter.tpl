@@ -12,6 +12,14 @@
         <div class="copter_image_box">
             <div class="copter_image" id="copter_image" style="background-image:url({$SITE_PATH}/img/copters/{$ns.copter->getUniqueId()}/1.jpg)"></div>
             <h2 class="main_title">{$ns.copter->getName()}</h2>
+            <div>    
+            <span>Temperature: </span>
+                <span id="temperature_value">none</span>
+            </div>    
+            <div>    
+                <span>Humidity: </span>
+                <span id="humidity_value">none</span>
+            </div>    
         </div> 
         <div class="copter_status_box">
             <a class="button grey" id="copter_reboot" >Reboot Copter</a>
@@ -29,7 +37,6 @@
     </div>
 
     <div class="right-content current_copter">
-
         <div class="copter_controls">
             <h2 class="main_title">Camera</h2>
             <div class="cc_table">

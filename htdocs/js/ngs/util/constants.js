@@ -26,8 +26,12 @@ ngs.Constants = {
     HCSR04_COMMAND: "hcsr04",
     START_STREAM_DISTANCE_DATA: "start_distance_streaming",
     STOP_STREAM_DISTANCE_DATA: "stop_distance_streaming",
+    DHT_COMMAND: "dht",
+    START_STREAM_DHT_DATA: "start_dht_streaming",
+    STOP_STREAM_DHT_DATA: "stop_dht_streaming",
     DATA_INFO_NAME: "data_info",
     DATA_INFO_GPS: "gps_data",
     DATA_INFO_DISTANCE_METERS: "distance_meters_data",
-    DATA_INFO_MPU: "mpu_data"
+    DATA_INFO_MPU: "mpu_data",
+    DATA_INFO_DHT: "dht_data"
 };
