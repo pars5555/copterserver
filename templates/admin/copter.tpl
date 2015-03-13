@@ -106,8 +106,7 @@
                 <div id="front_distance_meter_value" style="border-radius: 100% 100% 0 0;border: 2px solid black;width: 100px; height:100px;text-align: center;float:left;margin-left: 50px"></div>
                 <div id="right_distance_meter_value" style="border-radius: 100% 100% 0 0;border: 2px solid black;width: 100px; height:100px;text-align: center;transform: rotate(45deg);float:left;margin-left: 50px; margin-top:50px"></div>
                 <div style="clear:both"></div>
-                <button class="button grey" id="startDistanceStreaming">Start Distance Streaming</button>
-
+               
                 <div class="onoffswitch" style="float:left">
                     <input type="checkbox" class="onoffswitch-checkbox" id="distance_meters_on_off">
                     <label class="onoffswitch-label" for="distance_meters_on_off">
