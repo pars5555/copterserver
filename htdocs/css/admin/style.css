@@ -542,7 +542,7 @@ header{
 
 .accelerometer_state .top{
     transform: rotateX(90deg) translateZ(1em);
- 
+
 }
 
 .accelerometer_state .top.side{
@@ -729,6 +729,8 @@ footer{
 .onoffswitch {
     position: relative; width: 90px;
     -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
+    display:inline-block;
+    vertical-align: middle;
 }
 .onoffswitch-checkbox {
     display: none;
@@ -773,4 +775,10 @@ footer{
 }
 .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
     right: 0px; 
+}
+
+.distance_meter_container{
+    margin: auto;
+    text-align: center;
+    width: 420px;
 }
