@@ -95,7 +95,7 @@ ngs.AdminCopterLoad = Class.create(ngs.AbstractLoad, {
     showHideGoogleMapMarker: function (show) {
         if (show) {
             if (ngs.copterGoogleMapMarker.getMap() == null) {
-                ngs.copterGoogleMapMarker.setMap(this.googleMap);
+                ngs.copterGoogleMapMarker.setMap(ngs.copterGoogleMap);
             }
         } else
         {
