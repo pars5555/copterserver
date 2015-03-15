@@ -16,11 +16,10 @@ ngs.AdminCopterLoad = Class.create(ngs.AbstractLoad, {
         return "admin_copter";
     },
     afterLoad: function () {
+        this.initGoogleMap();
         ngs.nestLoad('admin_copter_home_list', {});
         this.initSocketConnection();
         this.initCameraStartStop();
-        this.initGoogleMap();
-        this.initCopterHomes();
         this.initGpsOnOff();
         this.connectionLogToggle();
         this.initGpioFunctionality();
@@ -29,6 +28,26 @@ ngs.AdminCopterLoad = Class.create(ngs.AbstractLoad, {
         this.engineControlButton();
         this.initEngineStartStopButtons();
         this.initDistanceMeters();
+    },
+    initGoogleMap: function () {
+        var mapCenterLng = 44.516495;
+        var mapCenterLat = 40.206875;
+        var mapOptions = {
+            center: {lat: mapCenterLat, lng: mapCenterLng},
+            zoom: 16
+        };
+        ngs.copterGoogleMap = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
+
+        ngs.copterGoogleMapMarker = new google.maps.Marker({position: {lat: mapCenterLat, lng: mapCenterLng}, map: ngs.copterGoogleMapMarker});
+        ngs.copterGoogleMapMarker.setTitle("Lat: " + mapCenterLat + "\r\n" + "Lng: " + mapCenterLng);
+
+        google.maps.event.addListener(ngs.copterGoogleMapMarker, 'click', function (event) {
+            var mLat = event.latLng.lat();
+            var mLng = event.latLng.lng();
+
+        });
+
     },
     initDistanceMeters: function () {
         var self = this;
@@ -59,25 +78,6 @@ ngs.AdminCopterLoad = Class.create(ngs.AbstractLoad, {
         jQuery('#top_distance_meter_value').html(top > 0 ? (top + " cm") : "");
         //distance_meters_on_off
     },
-    initCopterHomes: function () {
-        var copterHomesJson = jQuery('#copterHomesJson').val();
-        var copterHomesArray = jQuery.parseJSON(copterHomesJson);
-        var image = {
-            url: '/img/gmap_flag.png',
-            // This marker is 20 pixels wide by 32 pixels tall.
-            size: new google.maps.Size(20, 32),
-            // The origin for this image is 0,0.
-            origin: new google.maps.Point(0, 0),
-            // The anchor for this image is the base of the flagpole at 0,32.
-            anchor: new google.maps.Point(0, 32)
-        };
-        for (var i = 0; i < copterHomesArray.length; i++)
-        {
-            var copterHome = copterHomesArray[i];
-            var homeMarker = new google.maps.Marker({position: {'lat': parseFloat(copterHome.lat), 'lng': parseFloat(copterHome.lng)}, map: this.googleMap, icon: image});
-            this.googleMapMarker.setTitle(homeMarker.title);
-        }
-    },
     initGpsOnOff: function () {
         var self = this;
         jQuery('#gps_on_off').change(function () {
@@ -94,12 +94,12 @@ ngs.AdminCopterLoad = Class.create(ngs.AbstractLoad, {
     },
     showHideGoogleMapMarker: function (show) {
         if (show) {
-            if (this.googleMapMarker.getMap() == null) {
-                this.googleMapMarker.setMap(this.googleMap);
+            if (ngs.copterGoogleMapMarker.getMap() == null) {
+                ngs.copterGoogleMapMarker.setMap(this.googleMap);
             }
         } else
         {
-            this.googleMapMarker.setMap(null);
+            ngs.copterGoogleMapMarker.setMap(null);
         }
     },
     initRebootButton: function () {
@@ -111,26 +111,6 @@ ngs.AdminCopterLoad = Class.create(ngs.AbstractLoad, {
             self.sendJsonMessage(param);
         });
     },
-    initGoogleMap: function () {
-        var mapCenterLng = 44.516495;
-        var mapCenterLat = 40.206875;
-        var mapOptions = {
-            center: {lat: mapCenterLat, lng: mapCenterLng},
-            zoom: 16
-        };
-        this.googleMap = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-
-
-        this.googleMapMarker = new google.maps.Marker({position: {lat: mapCenterLat, lng: mapCenterLng}, map: this.googleMap});
-        this.googleMapMarker.setTitle("Lat: " + mapCenterLat + "\r\n" + "Lng: " + mapCenterLng);
-
-        google.maps.event.addListener(this.googleMap, 'click', function (event) {
-            var mLat = event.latLng.lat();
-            var mLng = event.latLng.lng();
-
-        });
-
-    },
     setMarkerOnGoogleMap: function (lng, lat)
     {
         if (lng == null || lat == null || !(lng > 0) || !(lat > 0))
@@ -139,9 +119,9 @@ ngs.AdminCopterLoad = Class.create(ngs.AbstractLoad, {
             return;
         }
         var latlng = new google.maps.LatLng(lat, lng);
-        this.googleMapMarker.setPosition(latlng);
-        this.googleMapMarker.setTitle("Lat: " + lat + "\r\n" + "Lng: " + lng);
-        this.googleMap.setCenter(latlng);
+        ngs.copterGoogleMapMarker.setPosition(latlng);
+        ngs.copterGoogleMapMarker.setTitle("Lat: " + lat + "\r\n" + "Lng: " + lng);
+        ngs.copterGoogleMap.setCenter(latlng);
     },
     getCameraSettings: function () {
         var ret = new Array();

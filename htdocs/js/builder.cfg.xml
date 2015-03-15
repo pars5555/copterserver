@@ -82,6 +82,8 @@
         <input>
             <files>
                 <file doc="true">ngs/actions/AbstractAction.class.js</file>
+                <file>ngs/actions/admin/RemoveCopterHomeAction.class.js</file>
+                <file>ngs/actions/admin/AddCopterHomeAction.class.js</file>
              
             </files>
         </input>

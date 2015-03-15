@@ -12,6 +12,20 @@
 	box-shadow: 0 0 5px #258CD1;
 }
 
+/*======= Blue Button =======*/
+.red{
+	background-color: #cc0000;
+	border:1px solid #212121;
+	color:#fff;	
+	border-radius:3px;
+	transition:all 0.3s ease;
+}
+
+.red:hover{
+	background-color: #cc2222;
+	box-shadow: 0 0 5px #cc4444;
+}
+
 /*======= Grey Button =======*/
 
 .grey{

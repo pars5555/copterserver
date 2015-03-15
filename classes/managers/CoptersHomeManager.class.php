@@ -36,13 +36,13 @@ class CoptersHomeManager extends AbstractManager {
         return self::$instance;
     }
     
-    public function addCopterHome($unique_id, $lng, $lat){
+    public function addCopterHome($unique_id, $title, $lng, $lat){
         $dto = $this->createDto();
         $dto->setCopterUniqueId($unique_id);
+        $dto->setTitle($title);
         $dto->setLng($lng);
         $dto->setLat($lat);
-        $this->insertDto($dto);
-        return true;
+        return $this->insertDto($dto);
     }
 
 }

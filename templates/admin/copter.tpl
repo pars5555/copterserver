@@ -13,7 +13,7 @@
             <div class="copter_image" id="copter_image" style="background-image:url({$SITE_PATH}/img/copters/{$ns.copter->getUniqueId()}/1.jpg)"></div>
             <h2 class="main_title">{$ns.copter->getName()}</h2>
             <div>    
-            <span>Temperature: </span>
+                <span>Temperature: </span>
                 <span id="temperature_value">none</span>
             </div>    
             <div>    
@@ -106,7 +106,7 @@
                 <div id="front_distance_meter_value" class="front_distance_meter_value" style="border-radius: 100% 100% 0 0;border: 2px solid black;width: 100px; height:100px;text-align: center;float:left;margin-left: 50px"></div>
                 <div id="right_distance_meter_value" class="right_distance_meter_value" style="border-radius: 100% 100% 0 0;border: 2px solid black;width: 100px; height:100px;text-align: center;transform: rotate(45deg);float:left;margin-left: 50px; margin-top:50px"></div>
                 <div style="clear:both"></div>
-               
+
                 <div class="onoffswitch">
                     <input type="checkbox" class="onoffswitch-checkbox" id="distance_meters_on_off">
                     <label class="onoffswitch-label" for="distance_meters_on_off">
@@ -130,8 +130,8 @@
                         <div class="clear"></div>
                     </label>
                 </div>
-                </h2>
-                <div id="gps_error_message" style="float:right; color:red"></div>
+            </h2>
+            <div id="gps_error_message" style="float:right; color:red"></div>
             <div style="clear:both"></div>
             <div class="map_canvas" id="map-canvas"></div>
             <div style="clear:both"></div>
