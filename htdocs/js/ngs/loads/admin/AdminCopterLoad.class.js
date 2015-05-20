@@ -28,6 +28,12 @@ ngs.AdminCopterLoad = Class.create(ngs.AbstractLoad, {
         this.engineControlButton();
         this.initEngineStartStopButtons();
         this.initDistanceMeters();
+        this.onlyControls();
+    },
+    onlyControls: function () {
+        jQuery("#onlyControls").on("click", function () {
+            jQuery("#copter_controls_container").toggleClass("active");
+        });
     },
     initGoogleMap: function () {
         var mapCenterLng = 44.516495;

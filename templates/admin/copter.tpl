@@ -37,7 +37,12 @@
     </div>
 
     <div class="right-content current_copter">
-        <div class="copter_controls">
+        <div class="copter_controls f_menu_item" data-menu="coopter-controls">
+            <div class="menu_close f_menu_close">
+                <span class="glyphicon"></span>
+                <span>Close Copter Controls</span>
+            </div>
+
             <h2 class="main_title">Camera</h2>
             <div class="cc_table">
                 <div class="form-group">
@@ -79,7 +84,7 @@
         </div>
 
         <div class="copter_engine">
-            <div class="copter_controls_container">
+            <div id="copter_controls_container" class="copter_controls_container">
                 <h2 class="main_title">Control</h2>
                 <div class="engine_controls">
                     <div class="ec_block" id="throttle_yaw_container" >
@@ -99,7 +104,10 @@
                         <div id="pitch_roll_values"></div>                    
                     </div>
                 </div>
-                <button class="button grey" id="startEngine">StartEngine</button>
+                <div class="control_buttons">
+                    <button class="button grey" id="startEngine">StartEngine</button>
+                    <button class="button grey" id="onlyControls">Only Controls</button>
+                </div>
             </div>
             <div class="distance_meter_container">
                 <div id="left_distance_meter_value" class="left_distance_meter_value" style="border-radius: 100% 100% 0 0;border: 2px solid black;width: 100px; height:100px;text-align: center;transform: rotate(-45deg);float:left; margin-top:50px"></div>
@@ -119,7 +127,12 @@
             </div>
         </div>
 
-        <div class="copter_map">
+        <div class="copter_map f_menu_item" data-menu="coopter-map">
+            <div class="menu_close f_menu_close">
+                <span class="glyphicon"></span>
+                <span>Close Copter Map</span>
+            </div>
+
             <h2 class="main_title">
                 <span>Map</span>
                 <div class="onoffswitch">

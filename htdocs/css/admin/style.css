@@ -184,6 +184,51 @@ header{
     margin: auto;
 }
 
+.menu_btn{
+    border-radius:5px;
+    padding:5px;
+    background-color:#ccc;
+    border:1px solid #999;
+    font-weight: 600;
+    font-size:17px;
+    color:#777;
+    cursor:pointer;
+    margin-top:10px;
+}
+.menu_btn[data-pos="left"]{
+    float:left;
+}
+.menu_btn[data-pos="right"]{
+    float:right;
+}
+.menu_btn span{
+    display:inline-block;
+    vertical-align: middle;
+}
+.menu_btn .glyphicon{
+    font-size:1.2em;
+}
+
+.menu_close{
+    border-radius:5px;
+    padding:5px;
+    background-color:#ccc;
+    border:1px solid #999;
+    font-weight: 600;
+    font-size:17px;
+    color:#777;
+    cursor:pointer;
+    margin-bottom:10px; 
+    text-align: center;
+}
+.menu_close span{
+    display:inline-block;
+    vertical-align: middle;
+}
+.menu_close .glyphicon{
+    font-size:1.2em;
+}
+
 /*****************************************************************************************/
 /***************************************** CONTENT ***************************************/
 /*****************************************************************************************/
@@ -193,7 +238,11 @@ header{
     margin: auto;
     max-width: 1920px;
     padding: 25px;
-    width: calc(100% - 52px);
+    width: 100%;
+
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 .main_content{
@@ -424,9 +473,42 @@ header{
     padding:10px;
     width:33%;
 }
-
 .engine_controls {
     text-align: center;
+    white-space: nowrap;
+}
+
+.copter_controls_container.active{
+    width:100%;
+    height:100%;
+    padding-top:10px;
+    position:fixed;
+    top:0;
+    left:0;
+    background-color:#fff;
+    z-index: 10000;
+
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.copter_controls_container.active .main_title{
+    display:none;
+}
+.copter_controls_container.active .control_buttons{
+    margin:auto;
+}
+.control_buttons{
+    white-space: nowrap;
+    text-align: center;
+    margin:20px auto;
+}
+.control_buttons .button{
+    display:inline-block;
+    vertical-align: middle;
+    margin:15px;
+    padding: 10px 15px;
+    width:auto;
 }
 
 .ec_block {
@@ -434,34 +516,48 @@ header{
     border-radius: 50%;
     display: inline-block;
     height: 200px;
-    margin: 0 40px;
+    margin: auto;
     vertical-align: middle;
     width: 200px;
     position: relative;
+}
+
+.ec_block:first-child{
+    margin-right: 20px;    
 }
 
 .ec_block .x_line{
     position: absolute;
     top:50%;
     left:0;
-    width:120%;
+    width:100%;
     height:1px;
     background-color:red;
     text-align: right;
     z-index: -1;
     pointer-events: none;
+    padding-right:15px;
+
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 .ec_block .y_line{
     position: absolute;
-    top:-20%;
+    top:0%;
     left:50%;
-    height:120%;
+    height:100%;
     width:1px;
     background-color:red;
     text-indent: 5px;
     z-index: -1;
     pointer-events: none;
+    padding-top:15px;
+
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
 }
 .ec_block .ec_btn{
     position:absolute;
@@ -568,20 +664,27 @@ header{
 /*Connection Log Messages*/
 
 .conection_log_box{
-    width:500px;
+    width:100%;
+    max-width: 500px;
     height:300px;
     position:fixed;
     top:100px;
-    right:-490px;
+    right:0;
+    margin-right:45px;
+    padding-left:35px;
     transition: all 0.5s ease;
     z-index: 1000;
-    background-color:#fff;
+    transform: translate(100%,0);
+
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 .conection_log_box .con_log_btn{
     position:absolute;
     top:0;
-    left:-29px;
+    left:6px;
     width:30px;
     height:30px;
     border:1px solid #999;
@@ -591,17 +694,23 @@ header{
     background:url(../../img/left_arrow.png) no-repeat scroll 50% 50% / 100% transparent;    
 }
 .conection_log_box.opened{
-    right:0;
+    transform: translate(0,0);
+    margin-right:0px;
 }
 .conection_log_box.opened .con_log_btn{
     background-image:url(../../img/right_arrow.png);
 }
 
 .conection_log_box .conectionLog{
+    background-color:#fff;
     padding:15px;
-    height:calc(100% - 30px);
+    height:100%;
     overflow: auto;
     border:1px solid #999;
+
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 .conection_log_box .conectionLog .my_message{
@@ -707,7 +816,9 @@ footer{
 /*****************************************************************************************/
 /***************************************** GPIO CONTROLS ****************************************/
 /*****************************************************************************************/
-
+.gpio_control {
+    margin-bottom: 20px;
+}
 .gpio_ctrl_table .table-cell{
     vertical-align: bottom;
     width: 33%;
@@ -781,4 +892,88 @@ footer{
     margin: auto;
     text-align: center;
     width: 420px;
+}
+
+/******************************************************************************/
+/*                                                                            */
+/*                                 RESPONSIVE                                 */
+/*                                                                            */
+/******************************************************************************/
+
+@media screen and (max-width : 1450px){
+    #copterJwPlayerContainer,
+    #copterJwPlayerContainer>div,
+    #copterJwPlayerContainer object,
+    #copterVlcContainer,
+    #copterVlcContainer embed{
+        width: 360px !important;
+        height: 240px !important;
+        margin: 10px auto 0;
+    }
+
+    .copter_controls .cc_table{
+        display:block;
+        width:auto;
+    }
+    .copter_controls .form-group{
+        display:block;
+        text-align: center;
+        padding:0;
+        margin-top:10px;
+    }
+}
+@media screen and (max-width : 1450px){
+    .right-content.current_copter{
+        display:block;
+        width:auto;
+    }
+    .copter_controls,
+    .copter_map{
+        display:block;
+        width:100%;
+        height:100%;
+        max-width:500px;
+        position:fixed;
+        top:0;
+        padding:10px;
+        overflow: auto;
+        z-index:5000;
+        background-color:#fff;
+        transition:all 0.3s ease;
+        box-shadow: 0 0 7px #777;
+
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+    .copter_controls{
+        left:-500px;
+    }
+    .copter_controls.active{
+        left:0px;
+    }
+    .copter_map{
+        right:-500px;
+    }
+    .copter_map.active{
+        right:0px;
+    }
+    .copter_engine{
+        display:block;
+        width:auto;
+    }
+}
+@media screen and (max-width : 768px){
+    .wrapper{
+        padding:10px;
+    }
+}
+@media screen and (max-width : 550px){
+    .status,
+    .copter_image_box,
+    .copter_status_box{
+        display:block;
+        width:auto;
+        text-align: center;
+    }
 }
